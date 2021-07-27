@@ -12,6 +12,8 @@ A developer habit tracker VS Code extension.
 
 ## Quick start
 
+To start enable the extension, you can search it on the VS Code extension market place and install it. To subscribe to a notification system and to track your work, you can install the progressive web app that comes with it. On [Slice](https://slice.tech) the web tracker.
+
 ### Backend
 
 ### Frontend
@@ -23,6 +25,8 @@ A developer habit tracker VS Code extension.
 If you want to say **thank you** or/and support active development of `Slice`:
 
 Together, we can make this project **better** every day!
+
+### Future works
 
 ## ⚠️ License
 
