@@ -5,15 +5,10 @@ const schema=  mongoose.Schema;
 
 const userschema = new schema({
     name: {type :String },
-    panNumber: {type :String },
-    aadhar: {type :String},
-    username: {type :String },
+    githubUsername: {type :String },
     email: {type :String,},
     password: {type :String },
     number:{type :String},
-    groups: [{type :mongoose.Types.ObjectId,required:true,ref:'Group'}],
-    transaction: [{type :mongoose.Types.ObjectId,required:true,ref:'Transaction'}],
-    portfolio:[{type: Map}],
 },{
     versionKey: false 
   });

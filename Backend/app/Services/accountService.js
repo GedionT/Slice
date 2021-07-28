@@ -67,7 +67,4 @@ export default class AccountService{
         throw (new Exceptions.ValidationException("Error finding user details"));
         }
     }
-
-
-
 }
