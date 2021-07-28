@@ -10,9 +10,9 @@ export default class AccountService{
     async addAccount(args) {
         try {
             const {number,username,email,githubUsername}=args
-            let verifyUsername =  await this.verifyUserDetail({number,username,email,githubUsername})
+            let verifyUsername =  await this.verifyUsername(githubUsername)
             if(verifyUsername){
-                throw (new Exceptions.ConflictException("details already exist"));
+                throw (new Exceptions.ConflictException("Username already exists"));
             } 
             let hasedPassword = await bycrypt.hash(args.password,12)
             args.password = hasedPassword
