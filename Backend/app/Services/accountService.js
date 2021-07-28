@@ -30,9 +30,8 @@ export default class AccountService{
     }
     async loginAccount(args) {
         try {
-            console.log(args)
             const {githubUsername}=args
-            let profile = await this.verifyUsername({githubUsername})
+            let profile = await this.verifyUsername(githubUsername)
             if (!profile) {
                 throw (new Exceptions.ConflictException("Username doesn't exist"));
             }
