@@ -9,16 +9,16 @@ export default class AccountService{
     }
     async addAccount(args) {
         try {
-            const {number,email,githubUsername}=args
-            let verifyUsername =  await this.verifyUsername(githubUsername)
-            let verifyNumber =  await this.verifyUserDetail({number:number})
-            let verifyEmail =  await this.verifyUserDetail({email:email})
+            const {email,githubUsername,number}=args;
+            let verifyUsername =  await this.verifyUsername(githubUsername);
+            let verifyNumber =  number?await this.verifyUserDetail({number:number}):number;
+            let verifyEmail =  await this.verifyUserDetail({email:email});
             if(verifyUsername){
-                throw (new Exceptions.ConflictException("This Github user already exists"));
+                throw (new Exceptions.ConflictException("This Github user with same username already exists"));
             }if(verifyNumber){
-                throw (new Exceptions.ConflictException("This Github user already exists"));
+                throw (new Exceptions.ConflictException("This Github user with same number already exists"));
             }if(verifyEmail){
-                throw (new Exceptions.ConflictException("This Github user already exists"));
+                throw (new Exceptions.ConflictException("This Github user with same email already exists"));
             }
             let hasedPassword = await bycrypt.hash(args.password,12)
             args.password = hasedPassword
@@ -30,8 +30,9 @@ export default class AccountService{
     }
     async loginAccount(args) {
         try {
-            const {username}=args
-            let profile = await this.verifyUsername({username})
+            console.log(args)
+            const {githubUsername}=args
+            let profile = await this.verifyUsername({githubUsername})
             if (!profile) {
                 throw (new Exceptions.ConflictException("Username doesn't exist"));
             }
@@ -45,8 +46,6 @@ export default class AccountService{
         throw error;
         }
     }
-
-
     async verifyUsername(args) {
         try {
             let accountInfo = await this.repository.findUsername(args);
@@ -55,16 +54,6 @@ export default class AccountService{
         throw error;
         }
     }
-
-    async findUid (args) {
-        try {
-            console.log("fsdf")
-            return await this.repository.findUid(args);
-        } catch(error){
-            throw error;
-        }
-    }
-
     async verifyUserDetail(args) {
         try {
             let accountInfo = await this.repository.findUserDetail(args);

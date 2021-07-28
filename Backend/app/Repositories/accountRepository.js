@@ -10,24 +10,17 @@ export default class AccountRepository {
             return "error at finding"
         }
     }
-    async findUid (obj) {
-        try {
-            console.log("DFSdf")
-            return await UserModel.findById(obj,'-password -_id');
-        } catch (error) {
-            return "error finding User"
-        }
-    }
     async findUsername(obj){
         try {
-            const found = await UserModel.findOne({username:obj.username})
+            const found = await UserModel.findOne({githubUsername:obj})
             return found;
         } catch (error) {
             return "error at finding"
         }
     }
     async addUser(obj){
-        const userModel = new UserModel({obj})
+        const userModel = new UserModel(obj)
+        console.log(userModel)
         let userDetails;
         let token;
         try{
