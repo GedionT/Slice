@@ -18,6 +18,10 @@
 			{
 				"command": "slice.helloWorld",
 				"title": "Hello World"
+			},
+			{
+				"command": "slice.showTime",
+				"title": "Show Time"
 			}
 		]
 	},
