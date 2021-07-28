@@ -9,8 +9,8 @@ export default class AccountService{
     }
     async addAccount(args) {
         try {
-            const {panNumber,aadhar,username,email,number}=args
-            let verifyUsername =  await this.verifyUserDetail({panNumber,aadhar,username,email,number})
+            const {number,username,email,githubUsername}=args
+            let verifyUsername =  await this.verifyUserDetail({number,username,email,githubUsername})
             if(verifyUsername){
                 throw (new Exceptions.ConflictException("details already exist"));
             } 
