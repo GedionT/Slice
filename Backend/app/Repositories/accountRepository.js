@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken';
 export default class AccountRepository {
     async findUserDetail(obj){
         try {
-            const found = await UserModel.findOne({username:obj.username,panCard:obj.panCard,email:obj.email,number:obj.number,aadhar:obj.aadhar})
+            const found = await UserModel.findOne(obj)
             return found;
         } catch (error) {
             return "error at finding"
@@ -27,17 +27,7 @@ export default class AccountRepository {
         }
     }
     async addUser(obj){
-        const {name,panNumber,aadhar,username,email,password,number}=obj
-        const userModel = new UserModel({name,
-            panNumber,
-            aadhar,
-            username,
-            email,
-            password,
-            number,
-            groups:[],
-            portfolio:[]
-        })
+        const userModel = new UserModel({obj})
         let userDetails;
         let token;
         try{

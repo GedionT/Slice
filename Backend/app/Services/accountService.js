@@ -9,11 +9,17 @@ export default class AccountService{
     }
     async addAccount(args) {
         try {
-            const {number,username,email,githubUsername}=args
+            const {number,email,githubUsername}=args
             let verifyUsername =  await this.verifyUsername(githubUsername)
+            let verifyNumber =  await this.verifyUserDetail({number:number})
+            let verifyEmail =  await this.verifyUserDetail({email:email})
             if(verifyUsername){
-                throw (new Exceptions.ConflictException("Username already exists"));
-            } 
+                throw (new Exceptions.ConflictException("This Github user already exists"));
+            }if(verifyNumber){
+                throw (new Exceptions.ConflictException("This Github user already exists"));
+            }if(verifyEmail){
+                throw (new Exceptions.ConflictException("This Github user already exists"));
+            }
             let hasedPassword = await bycrypt.hash(args.password,12)
             args.password = hasedPassword
             let accountInfo = await this.repository.addUser(args);

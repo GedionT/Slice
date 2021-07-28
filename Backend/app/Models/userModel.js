@@ -8,7 +8,7 @@ const userschema = new schema({
     githubUsername: {type :String },
     email: {type :String,},
     password: {type :String },
-    number:{type :String},
+    number:{type :String,required:false},
 },{
     versionKey: false 
   });
