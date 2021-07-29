@@ -1,36 +1,32 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
 const vscode = require("vscode");
 
-// this method is called when your extension is activated
-// your extension is activated the very first time the command is executed
+// lib imports
+const uploader = require("./lib/Uploader");
+const log = require("./lib/Logger");
+const { isDebugMode } = require("./lib/Constants");
 
-/**
- * @param {vscode.ExtensionContext} context
+/*
+ *
+ * Methods for uploading open track data
+ * Uploading coding track data
+ * Handle VSCode events
+ * Update configurations
+ *
  */
+
 function activate(context) {
-  // Use the console to output diagnostic information (console.log) and errors (console.error)
-  // This line of code will only be executed once when your extension is activated
-  console.log('Congratulations, your extension "slice" is now active!');
+  console.log('Congratulations, your extension "Slice" is now active!');
 
-  // The command has been defined in the package.json file
-  // Now provide the implementation of the command with  registerCommand
-  // The commandId parameter must match the command field in package.json
   let disposable = vscode.commands.registerCommand(
-    "slice.helloWorld",
+    "slice.helloDev",
     function () {
-      // The code you place here will be executed every time your command is executed
-
-      // Display a message box to the user
-      vscode.window.showInformationMessage("Hello from Slice! 👋");
+      vscode.window.showInformationMessage(
+        "Hello from Slice! 👋 I will track your habit and report to it to you."
+      );
     }
   );
 
-  let disposable2 = vscode.commands.registerCommand("slice.showTime", () => {
-    vscode.window.showWarningMessage("It is now " + new Date().toString());
-  });
-
-  context.subscriptions.push(disposable, disposable2);
+  context.subscriptions.push(disposable);
 }
 
 // this method is called when your extension is deactivated
