@@ -8,7 +8,7 @@ A developer habit tracker VS Code extension.
 </h1>
 <p align="center">A VS Code extension to <b>track</b>, <b>understand</b> <br/>and <b>improve</b> your development experience by directly understanding your development habits.<br/><br/>Focus on <b>writing</b> code and <b>building</b> Slice will break down your habits and recommend efficient habits</p>
 
-<p align="center"><a href="" target="_blank"><img src="https://img.shields.io/badge/version-v2.2.5-blue?style=for-the-badge&logo=none" alt="cli version" /></a>&nbsp;<a href="" target="_blank"><img src="" alt="go version" /></a>&nbsp;<a href="https://gocover.io/github.com/create-go-app/cli/pkg/cgapp" target="_blank"><img src="https://img.shields.io/badge/Go_Cover-89.2%25-success?style=for-the-badge&logo=none" alt="go cover" /></a>&nbsp;<a href="https://goreportcard.com/report/github.com/create-go-app/cli" target="_blank"><img src="https://img.shields.io/badge/Go_report-A+-success?style=for-the-badge&logo=none" alt="go report" /></a>&nbsp;<img src="https://img.shields.io/badge/license-apache_2.0-red?style=for-the-badge&logo=none" alt="license" /></p>
+### Status Icons Go Here
 
 ## Quick start
 
@@ -30,5 +30,5 @@ Together, we can make this project **better** every day!
 
 ## ⚠️ License
 
-`Slice` is free and open-source software licensed under the [MIT License](https://github.com/slice/). Official [logo](https://github.com) was created by [Gedion T.](https://gedion-tesh.me/) and [Shivam](https://shivam.com) and distributed under ...
+`Slice` is free and open-source software licensed under the [MIT License](https://github.com/slice/). Official [logo](https://github.com) was created by [Gedion T.](https://gedion-tesh.me/), [Shivam](https://shivam.com), and [Hargun](https://hkaur.com) distributed under ...
 {"mode":"full","isActive":false}
