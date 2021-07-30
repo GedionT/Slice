@@ -15,11 +15,11 @@ A developer habit tracker VS Code extension.
 To start enable the extension, you can search it on the VS Code extension market place and install it. To subscribe to a notification system and to track your work, you can install the progressive web app that comes with it. On [Slice](https://slice.tech) the web tracker.
 
 ### Backend
-
+<img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white">
 ### Frontend
-
+<img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white"><img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white">
 ### Database
-
+<img src="https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white">
 ## Project assistance
 
 If you want to say **thank you** or/and support active development of `Slice`:
@@ -29,5 +29,5 @@ Together, we can make this project **better** every day!
 ### Future works
 ## ⚠️ License
 
-`Slice` is free and open-source software licensed under the [MIT License](https://github.com/GedionT/Slice/). Official [logo](https://github.com) was created by [Gedion T.](https://github.com/GedionT), [Shivam](https://github.com/shivamsouravjha), and [Hargun](https://github.com/hkaur008.com) distributed under ...
+`Slice` is free and open-source software licensed under the [MIT License](https://github.com/GedionT/Slice/blob/master/LICENSE). Official [logo](https://github.com) was created by [Gedion T.](https://github.com/GedionT), [Shivam](https://github.com/shivamsouravjha), and [Hargun](https://github.com/hkaur008.com) distributed under ...
 {"mode":"full","isActive":false}
