@@ -27,8 +27,7 @@ If you want to say **thank you** or/and support active development of `Slice`:
 Together, we can make this project **better** every day!
 
 ### Future works
-
 ## ⚠️ License
 
-`Slice` is free and open-source software licensed under the [MIT License](https://github.com/slice/). Official [logo](https://github.com) was created by [Gedion T.](https://gedion-tesh.me/), [Shivam](https://shivam.com), and [Hargun](https://hkaur.com) distributed under ...
+`Slice` is free and open-source software licensed under the [MIT License](https://github.com/GedionT/Slice/). Official [logo](https://github.com) was created by [Gedion T.](https://github.com/GedionT), [Shivam](https://github.com/shivamsouravjha), and [Hargun](https://github.com/hkaur008.com) distributed under ...
 {"mode":"full","isActive":false}
