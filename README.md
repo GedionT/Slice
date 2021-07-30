@@ -2,6 +2,8 @@
 
 A developer habit tracker VS Code extension.
 
+[![CodeQL](https://github.com/GedionT/Slice/actions/workflows/codeql-analysis.yml/badge.svg?branch=master)](https://github.com/GedionT/Slice/actions/workflows/codeql-analysis.yml)
+
 <h1 align="center">
   <img src="https://i.im.ge/2021/07/27/DBVLX.png" alt="Slice Logo" width="224px"/><br/>
   Slice, Know your habits
