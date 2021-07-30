@@ -24,13 +24,20 @@ To start enable the extension, you can search it on the VS Code extension market
 ### Database
 <img src="https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white">
 
+### Extension
+<img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white">  
+
 ## Project assistance
 
 If you want to say **thank you** or/and support active development of `Slice`:
 
 Together, we can make this project **better** every day!
 
-### Future works
+### Wireframes 
+
+- [Figma UI Design](https://www.figma.com/file/cul71mDT37gGNMhBuG5dtr/Untitled?node-id=0%3A1)
+- [Lucid Flow: System Design](https://lucid.app/lucidchart/c3d9fee3-0123-42c8-b444-9bda69299d81/edit?viewport_loc=-16%2C-322%2C2413%2C1101%2C0_0&shared=true)
+
 ## ⚠️ License
 
 `Slice` is free and open-source software licensed under the [MIT License](https://github.com/GedionT/Slice/blob/master/LICENSE). Official [logo](https://github.com) was created by [Gedion T.](https://github.com/GedionT), [Shivam](https://github.com/shivamsouravjha), and [Hargun](https://github.com/hkaur008.com) distributed under ...
