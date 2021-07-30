@@ -2,15 +2,14 @@
 
 A developer habit tracker VS Code extension.
 
-[![CodeQL](https://github.com/GedionT/Slice/actions/workflows/codeql-analysis.yml/badge.svg?branch=master)](https://github.com/GedionT/Slice/actions/workflows/codeql-analysis.yml)
-
 <h1 align="center">
   <img src="https://i.im.ge/2021/07/27/DBVLX.png" alt="Slice Logo" width="224px"/><br/>
   Slice, Know your habits
 </h1>
-<p align="center">A VS Code extension to <b>track</b>, <b>understand</b> <br/>and <b>improve</b> your development experience by directly understanding your development habits.<br/><br/>Focus on <b>writing</b> code and <b>building</b> Slice will break down your habits and recommend efficient habits</p>
+<p align="center">A VS Code extension to <b>track</b>, <b>understand</b> <br/>and <b>improve</b> your development experience by directly understanding your development habits.<br/><br/>Focus on <b>writing</b> code and <b>building</b> products while <em>Slice</em> break down your habits and recommend efficient habits</p>
 
-### Status Icons Go Here
+
+[![CodeQL](https://github.com/GedionT/Slice/actions/workflows/codeql-analysis.yml/badge.svg?branch=master)](https://github.com/GedionT/Slice/actions/workflows/codeql-analysis.yml)
 
 ## Quick start
 
