@@ -22,6 +22,7 @@ To start enable the extension, you can search it on the VS Code extension market
 
 ### Database
 <img src="https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white">
+
 ## Project assistance
 
 If you want to say **thank you** or/and support active development of `Slice`:
