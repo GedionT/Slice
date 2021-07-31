@@ -19,8 +19,16 @@ export default class AccountRepository {
         }
     }
     async addUser(obj){
+        obj['goals'] = [{'day':'Monday','hours':0},{'day':'Tuesday','hours':0},
+        {'day':'Wednesday','hours':0},{'day':'Thursday','hours':0},{'day':'Friday','hours':0},
+        {'day':'Saturday','hours':0},{'day':'Sunday','hours':0}] 
+        obj['current_week'] = [{'day':'Monday','hours':0},{'day':'Tuesday','hours':0},
+        {'day':'Wednesday','hours':0},{'day':'Thursday','hours':0},{'day':'Friday','hours':0},
+        {'day':'Saturday','hours':0},{'day':'Sunday','hours':0}]        
+        obj['last_week'] = [{'day':'Monday','hours':0},{'day':'Tuesday','hours':0},
+        {'day':'Wednesday','hours':0},{'day':'Thursday','hours':0},{'day':'Friday','hours':0},
+        {'day':'Saturday','hours':0},{'day':'Sunday','hours':0}]
         const userModel = new UserModel(obj)
-        console.log(userModel)
         let userDetails;
         let token;
         try{
@@ -29,7 +37,7 @@ export default class AccountRepository {
         } catch (error) {
             return "error at adding"
         }
-        return {"success":true,"token":token};
+        return {"success":true,"token":"token"};
     }
 
 }
