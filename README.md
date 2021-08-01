@@ -25,7 +25,8 @@ To start enable the extension, you can search it on the VS Code extension market
 <img src="https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white">
 
 ### Extension
-<img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white">  
+<img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white"> <img src="https://camo.githubusercontent.com/f465ef06b34e97927e9db4c421b277d7034c37b9c3051f526d42822da076e7e2/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f2d56535f436f64652d3030374143433f7374796c653d666f722d7468652d6261646765266c6f676f3d76697375616c2d73747564696f2d636f6465266c6f676f436f6c6f723d7768697465">
+
 
 ## Project assistance
 
