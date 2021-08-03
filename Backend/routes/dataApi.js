@@ -1,14 +1,15 @@
-import express from 'express';
+import express, { request } from 'express';
 import DataController from '../app/Controllers/dataController';
+import  uploadFile from '../app/Middleware/filereader';
 
 const DataApiRouter = express.Router();
 
-AccountApiRouter.post('/exten/data/send', (request, response) => {
+DataApiRouter.post('/exten/data/send/:uid',uploadFile.single('test'),(request, response) => {
   const dataController = new DataController(response);
   dataController.create(request);
 });
 
-AccountApiRouter.post('/front/data/get', (request, response) => {
+DataApiRouter.post('/front/data/get/:uid', (request, response) => {
     const dataController = new DataController(response);
     dataController.fetch(request);
 });

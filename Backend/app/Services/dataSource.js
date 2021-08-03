@@ -1,12 +1,18 @@
-import DataRepository from '../Repositories/dataRepository.js';
+import DataRepository from '../Repositories/dataRepository';
 import * as Exceptions from '../Exceptions/exceptions';
-export default class AccountService{
+const fs=require('fs');
+var path = require('path');
+const { promisify } = require('util')
+const unlinkAsync = promisify(fs.unlink)
+
+export default class DataService{
     constructor() {
         this.repository = new DataRepository();
     }
     async create (args) {
         try {
-            
+            console.log(args)
+            await unlinkAsync(args.path)
         } catch (error) {
         throw error;
         }
