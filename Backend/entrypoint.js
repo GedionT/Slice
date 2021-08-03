@@ -43,17 +43,17 @@ app.use((error, req, res, next) => {
   res.json({message: error.message || 'An unknown error occurred!', success: error.success||false});
 });
 
-// mongoose
-//   .connect(
-//     `mongodb+srv://${process.env.name}:${process.env.password}@cluster0.kzetf.mongodb.net/${process.env.db}?retryWrites=true&w=majority`,
-//     { useNewUrlParser: true, useUnifiedTopology: true,useCreateIndex: true }
+mongoose
+  .connect(
+    `mongodb+srv://${process.env.name}:${process.env.password}@cluster0.kzetf.mongodb.net/${process.env.db}?retryWrites=true&w=majority`,
+    { useNewUrlParser: true, useUnifiedTopology: true,useCreateIndex: true }
     
-//   )
-//   .then(() => {
-//     console.log('listening at port',process.env.PORT || 5000 )
+  )
+  .then(() => {
+    console.log('listening at port',process.env.PORT || 5000 )
     app.listen(process.env.PORT || 5000);
-  // })
-  // .catch(err => {
-  //   console.log(err);
-  // });
+  })
+  .catch(err => {
+    console.log(err);
+  });
   
