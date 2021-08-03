@@ -10,18 +10,14 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:slice.helloWorld"
+		"*"
 	],
 	"main": "./extension.js",
 	"contributes": {
 		"commands": [
 			{
-				"command": "slice.helloWorld",
-				"title": "Hello World"
-			},
-			{
-				"command": "slice.showTime",
-				"title": "Show Time"
+				"command": "slice.startTracking",
+				"title": "Start Tracking"
 			}
 		]
 	},
@@ -40,5 +36,10 @@
 		"mocha": "^8.4.0",
 		"typescript": "^4.3.2",
 		"vscode-test": "^1.5.2"
+	},
+	"dependencies": {
+		"axios": "^0.21.1",
+		"node-fetch": "^2.6.1",
+		"uuid": "^8.3.2"
 	}
 }

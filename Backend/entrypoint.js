@@ -4,12 +4,19 @@ import mongoose from 'mongoose';
 import Routes from './routes/routes';
 import Error from './app/Exceptions/error';
 
+const RateLimit = require('express-rate-limit');
+// set up rate limiter: max 5 request per min per ip
+var limiter = new RateLimit({
+  windowMs: 1*60*1000, // 1 minute
+  max: 5
+});
 
 require('dotenv').config();
 
 const app = express();
-app.use(bodyParser.json());
 
+app.use(bodyParser.json());
+app.use(limiter);
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader(
