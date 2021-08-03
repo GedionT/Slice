@@ -33,6 +33,7 @@
     "bookshelf": "^0.14.2",
     "bookshelf-paranoia": "^0.13.1",
     "cors": "^2.8.5",
+    "csv-parse": "^4.16.0",
     "csvtojson": "^2.0.10",
     "dotenv": "^6.2.0",
     "ejs": "^2.7.4",
