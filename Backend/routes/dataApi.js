@@ -1,16 +1,16 @@
 import express from 'express';
-import AccountController from '../app/Controllers/accountController';
+import DataController from '../app/Controllers/dataController';
 
 const DataApiRouter = express.Router();
 
 AccountApiRouter.post('/exten/data/send', (request, response) => {
-  const accountController = new AccountController(response);
-  accountController.addAccount(request);
+  const dataController = new DataController(response);
+  dataController.create(request);
 });
 
 AccountApiRouter.post('/front/data/get', (request, response) => {
-    const accountController = new AccountController(response);
-    accountController.addAccount(request);
+    const dataController = new DataController(response);
+    dataController.fetch(request);
 });
 
 export default DataApiRouter;
