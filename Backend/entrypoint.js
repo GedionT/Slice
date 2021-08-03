@@ -43,6 +43,7 @@ app.use((error, req, res, next) => {
   res.json({message: error.message || 'An unknown error occurred!', success: error.success||false});
 });
 
+
 mongoose
   .connect(
     `mongodb+srv://${process.env.name}:${process.env.password}@cluster0.kzetf.mongodb.net/${process.env.db}?retryWrites=true&w=majority`,
