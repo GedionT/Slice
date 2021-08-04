@@ -1,6 +1,6 @@
 /*
 	This module is used for probe extension running environment.
-	It can detect if modules are existed, i18n files exist.
+	It can detect if modules are existing, i18n files exist, etc.
 	And it can also generate diagnose file in the extension directory.
 */
 
