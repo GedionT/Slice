@@ -37,13 +37,6 @@ function _upload() {
   //Upload Lock
   if (uploading) return;
   //Queue is empty
-  if (!Q[0]) {
-    //Now the queue is empty
-    //And check is the server running in the local
-    // - If in local, status bar will display "Local", Else not
-    localServer.activeCheckIsLocalServerStart();
-    return statusBar.setStatus2Nothing();
-  }
 
   uploading = 1;
 
@@ -66,8 +59,7 @@ function _upload() {
       //Upload failed because network error
       //So check is local server mode ?
       //If is local server mode now, just start a new local server now.
-      localServer.detectOldSever_SoStartANewIfUnderLocalMode() ||
-        showErrorMessage(1, `Could not upload coding record: ${err.stack}`);
+      showErrorMessage(1, `Could not upload coding record: ${err.stack}`);
     }
 
     //If there are not network error

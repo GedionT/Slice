@@ -176,7 +176,7 @@ function updateConfigurations() {
   const uploadToken = String(extensionCfg.get("uploadToken"));
   const computerId = String(extensionCfg.get("computerId"));
   let mtt = parseInt(extensionCfg.get("moreThinkingTime"));
-  let uploadURL = "https://slice--back.herokuapp.com/api/users/upload/:userId";
+  let uploadURL = `https://slice--back.herokuapp.com/api/data/exten/data/send/${userId}`;
   // fixed wrong more thinking time configuration value
   if (isNaN(mtt)) mtt = 0;
   if (mtt < -15 * SECOND) mtt = -15 * SECOND;
