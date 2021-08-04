@@ -29,13 +29,24 @@ export default class DataService{
     async fetch(type,uid) {
         try {
             const userDetail = await this.repository.findUserDetail(uid);
-            console.log(userDetail);
+            const daily=[];
+            const goals=[];
+            const past=[];
+            for(var day in userDetail.current_week){
+                daily.push(userDetail.current_week[day]['hours'])
+            }
             if(type=="current"){
-
+                return {daily_hours:daily};
             }else if(type=="goal"){
-
+                for(var day in userDetail.goals){
+                    goals.push(userDetail.goals[day]['hours'])
+                }
+                return {daily_hours:daily,goals:goals};
             }else if(type=="past"){
-
+                for(var day in userDetail.last_week){
+                    past.push(userDetail.last_week[day]['hours'])
+                }
+                return {daily_hours:daily,last_week:past};
             }
         } catch (error) {
         throw error;

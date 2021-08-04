@@ -1,6 +1,5 @@
 import UserModel from "../Models/userModel";
-import jwt from 'jsonwebtoken';
-
+                                                                                          
 export default class DataRepository {
     async findUserDetail(obj){
         try {
