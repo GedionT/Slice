@@ -18,6 +18,15 @@ export default class AccountRepository {
             return "error at finding"
         }
     }
+    async edit(obj){
+        try {
+            const found = await obj.save();
+            return found;
+        } catch (error) {
+            console.log(error)
+            return "error at finding"
+        }
+    }
     async addUser(obj){
         obj['goals'] = [{'day':'Monday','hours':0},{'day':'Tuesday','hours':0},
         {'day':'Wednesday','hours':0},{'day':'Thursday','hours':0},{'day':'Friday','hours':0},

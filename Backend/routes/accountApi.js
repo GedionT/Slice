@@ -8,9 +8,9 @@ AccountApiRouter.post('/account/signup', (request, response) => {
   accountController.addAccount(request);
 });
 
-AccountApiRouter.post('/account/login/', (request, response) => {
+AccountApiRouter.post('/account/:uid/:type', (request, response) => {
   const accountController = new AccountController(response);
-  accountController.loginAccount(request);
+  accountController.getInfo(request);
 });
 
 AccountApiRouter.post('/account/:uid/info', (request, response) => {
