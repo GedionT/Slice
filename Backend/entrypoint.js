@@ -53,12 +53,11 @@ app.use((error, req, res, next) => {
 
 mongoose
   .connect(
-    `mongodb+srv://Slice:Slice@MLH@cluster0.kzetf.mongodb.net/Slice?retryWrites=true&w=majority`,
+    `mongodb://${process.env.name}:${process.env.password}@cluster0-shard-00-00.kzetf.mongodb.net:27017,cluster0-shard-00-01.kzetf.mongodb.net:27017,cluster0-shard-00-02.kzetf.mongodb.net:27017/${process.env.db}?ssl=true&replicaSet=atlas-r70n7s-shard-0&authSource=admin&retryWrites=true&w=majority`,
     { useNewUrlParser: true, useUnifiedTopology: true,useCreateIndex: true }
     
   )
   .then(() => {
-    console.log("FD")
     console.log('listening at port',process.env.PORT || 5000 )
 
     app.listen(process.env.PORT || 5000);
