@@ -14,12 +14,7 @@
 	],
 	"main": "./extension.js",
 	"contributes": {
-		"commands": [
-			{
-				"command": "slice.startTracking",
-				"title": "Start Tracking"
-			}
-		]
+		"commands": []
 	},
 	"scripts": {
 		"lint": "eslint .",
@@ -40,7 +35,6 @@
 	"dependencies": {
 		"axios": "^0.21.1",
 		"node-fetch": "^2.6.1",
-		"uuid": "^8.3.2",
-		"ws": "^8.0.0"
+		"request": "^2.88.2"
 	}
 }
