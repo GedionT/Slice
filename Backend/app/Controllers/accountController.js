@@ -43,4 +43,18 @@ export default class AccountController extends Controller {
           this.handleException(error)
       }
   }
+
+
+    getInfo (request) {
+      try {
+        let value = {_id:request.params.uid};
+        const userInfo = this.service.verifyUserDetail(value);
+        userInfo.then(res=>{
+          this.sendResponse(res);
+        })
+        .catch(error => {this.handleException(error)});
+      } catch (error){
+        this.handleException(error);
+      }
+    }
 }

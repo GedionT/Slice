@@ -10,20 +10,11 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:slice.helloWorld"
+		"*"
 	],
 	"main": "./extension.js",
 	"contributes": {
-		"commands": [
-			{
-				"command": "slice.helloWorld",
-				"title": "Hello World"
-			},
-			{
-				"command": "slice.showTime",
-				"title": "Show Time"
-			}
-		]
+		"commands": []
 	},
 	"scripts": {
 		"lint": "eslint .",
@@ -42,7 +33,8 @@
 		"vscode-test": "^1.5.2"
 	},
 	"dependencies": {
-		"request": "^2.88.2",
-		"uuid": "^8.3.2"
+		"axios": "^0.21.1",
+		"node-fetch": "^2.6.1",
+		"request": "^2.88.2"
 	}
 }
