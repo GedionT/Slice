@@ -4,6 +4,7 @@ import Menu from "./menu";
 
 
 const Graph =()=> {
+
   
   return (
     <div className="Graph">

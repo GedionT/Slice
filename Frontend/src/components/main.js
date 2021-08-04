@@ -3,7 +3,7 @@ import Menu from "./menu";
 import Graph from "./graph";
 
 
-const Main = () => {
+const Main = (response) => {
 
   return (
     <div className="Main">
