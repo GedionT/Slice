@@ -29,7 +29,10 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use("/api/users", Routes.AccountApiRouter);
+
+app.use('/api/users', Routes.AccountApiRouter); 
+app.use('/api/data', Routes.DataApiRouter); 
+
 
 app.use((req, res, next) => {
   const error = new Error("Could not find this route.", 404);
@@ -46,6 +49,7 @@ app.use((error, req, res, next) => {
     success: error.success || false,
   });
 });
+
 
 mongoose
   .connect(
