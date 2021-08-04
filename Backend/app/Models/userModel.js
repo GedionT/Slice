@@ -9,6 +9,9 @@ const userschema = new schema({
     email: {type :String,},
     password: {type :String },
     number:{type :String,required:false},
+    goals:[{day:String,hours:Number}],
+    current_week:[{day:String,hours:Number}],
+    last_week:[{day:String,hours:Number}],
 },{
     versionKey: false 
   });

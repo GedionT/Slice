@@ -28,6 +28,7 @@ app.use((req, res, next) => {
 }); 
 
 app.use('/api/users', Routes.AccountApiRouter); 
+app.use('/api/data', Routes.DataApiRouter); 
 
 app.use((req, res, next) => {
   const error = new Error('Could not find this route.', 404);      
@@ -41,6 +42,7 @@ app.use((error, req, res, next) => {
   res.status(error.code || 500)
   res.json({message: error.message || 'An unknown error occurred!', success: error.success||false});
 });
+
 
 mongoose
   .connect(
