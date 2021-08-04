@@ -46,11 +46,12 @@ app.use((error, req, res, next) => {
 
 mongoose
   .connect(
-    `mongodb+srv://${process.env.name}:${process.env.password}@cluster0.kzetf.mongodb.net/${process.env.db}?retryWrites=true&w=majority`,
+    `mongodb+srv://Slice:Slice@MLH@cluster0.kzetf.mongodb.net/Slice?retryWrites=true&w=majority`,
     { useNewUrlParser: true, useUnifiedTopology: true,useCreateIndex: true }
     
   )
   .then(() => {
+    console.log("FD")
     console.log('listening at port',process.env.PORT || 5000 )
     app.listen(process.env.PORT || 5000);
   })
