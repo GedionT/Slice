@@ -2,7 +2,6 @@
 
 const vscode = require("vscode");
 const helper = require("./VSCodeHelpers");
-const { Parser } = require("json2csv");
 
 const VSCODE_SETTINGS = "vscode-settings";
 const UNKNOWN = "unknown";
@@ -82,21 +81,10 @@ function generate(type, activeDocument, time, long) {
   obj.line = activeDocument.lineCount;
   obj.char = 0; //TODO: getText().length: But it affect extension efficiency
 
-  console.log(dumpUploadObject(obj));
-  // return obj;
-
-  // convert object to csv
-
-  try {
-    let parser = new Parser();
-    let csv = parser.parse(obj);
-    console.log(csv);
-    return csv;
-  } catch (err) {
-    console.log(err);
-  }
+  console.log(obj);
+  return obj;
 }
 
-function dumpUploadObject(obj) {
-  return `${obj.type} from ${obj.time} long ${obj.long}; ${obj.file}(${obj.lang}; line: ${obj.line}}); `;
-}
+// function dumpUploadObject(obj) {
+//   return `${obj.type} from ${obj.time} long ${obj.long}; ${obj.file}(${obj.lang}; line: ${obj.line}}); `;
+// }

@@ -2,6 +2,7 @@
 
 // const vscode = require("vscode");
 const ext = require("./VSCodeHelpers");
+const { Parser } = require("json2csv");
 const Request = require("request");
 
 let Q = [],
@@ -16,10 +17,6 @@ let Q = [],
   retryTime = 0;
 
 let uploader = {
-  /**
-   * @param {string} url
-   * @param {string} token
-   */
   set: function (url, token) {
     uploadURL = url;
     uploadToken = token;
@@ -41,7 +38,6 @@ function _upload() {
   //Set up upload token
   data.token = uploadToken;
 
-  /** @type {Request.CoreOptions} */
   const uploadOptions = { method: "POST", form: data, headers: uploadHeader };
 
   Request(uploadURL, uploadOptions, function (err, res, bd) {
@@ -53,8 +49,8 @@ function _upload() {
     if (err) {
       success = false;
       //Upload failed because network error
-      //So check is local server mode ?
       //If is local server mode now, just start a new local server now.
+      console.log(`could not upload coding record: ${err.stack}`);
       showErrorMessage(1, `Could not upload coding record: ${err.stack}`);
     }
 
@@ -64,6 +60,7 @@ function _upload() {
         returnObject = toJSON(bd);
         if (returnObject.JSONError) {
           success = false;
+          console.log(`Upload error, server response content not JSON!`);
           showErrorMessage(
             2,
             `Upload error: Server response content is not JSON!`
@@ -71,10 +68,14 @@ function _upload() {
         }
         if (returnObject.error) {
           success = false;
+          console.log(`Upload error: ${returnObject.error}`);
           showErrorMessage(3, `Upload error: ${returnObject.error}`);
         }
       } else {
         success = false;
+        console.log(
+          `Upload error: Response: ${res.statusCode} (${res.statusMessage})`
+        );
         showErrorMessage(
           2,
           `Upload error: Response: ${res.statusCode} (${res.statusMessage})`
@@ -103,6 +104,18 @@ function toJSON(bd) {
     return JSON.parse(bd);
   } catch (err) {
     return { JSONError: true, error: "Unrecognized response" };
+  }
+}
+
+function toCSV(json) {
+  // convert object to csv
+  try {
+    let parser = new Parser();
+    let csv = parser.parse(json);
+    console.log(csv);
+    return csv;
+  } catch (err) {
+    console.log(err);
   }
 }
 
