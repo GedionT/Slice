@@ -32,7 +32,7 @@ const INVALID_CODING_DOCUMENT_SCHEMES = [
 
 const EMPTY = { document: null, textEditor: null };
 
-// more thinking time from user config
+// more thinking time ( later version from user config )
 let moreThinkingTime = 0;
 //  current active document
 let activeDocument;
@@ -120,6 +120,7 @@ let EventHandler = {
       // at least open 5 sec
       if (trackData.openTime < now - AT_LEAST_WATCHING_TIME)
         uploadOpenTrackData(now);
+
       // at least coding 1 second
       if (trackData.codingSessionLength) uploadCodingTrackData();
     }
@@ -170,27 +171,49 @@ let EventHandler = {
 };
 
 /* when extension launch or vscode config change */
-function updateConfigurations() {
-  // // Slice Config
-  const extensionCfg = extHelpers.getConfig("slice");
-  const userToken = String(extensionCfg.get("userToken"));
-  const computerId = String(extensionCfg.get("computerId"));
-  let mtt = parseInt(extensionCfg.get("moreThinkingTime"));
-  let uploadURL = `https://slice--back.herokuapp.com/api/data/exten/data/send/${userId}`;
-  // fixed wrong more thinking time configuration value
-  if (isNaN(mtt)) mtt = 0;
-  if (mtt < -15 * SECOND) mtt = -15 * SECOND;
-  moreThinkingTime = mtt;
+async function updateConfigurations(username, password) {
+  // login
+  let uName = username;
+  let pwd = password;
 
+  const resp = await axios({
+    method: "POST",
+    url: "https://slice--back.herokuapp.com/api/users/account/login",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    data: {
+      githubUsername: uName,
+      password: pwd,
+    },
+  })
+    .then((response) => {
+      console.log(response);
+      if (response.status == 200) {
+        stat = "Success. You are Logged In!";
+        userId = response.data.userid;
+        userTkn = response.data.token;
+      }
+    })
+    .catch((error) => console.log(error));
+
+  // // Slice Config
+  const userToken = userTkn;
+  const uploadURL = `https://slice--back.herokuapp.com/api/data/exten/data/send/${userId}`;
+  // fixed wrong more thinking time configuration value
   uploader.set(uploadURL, userToken);
-  uploadObject.init(computerId || `unknown-${require("os").platform()}`);
+  uploadObject.init(`${username}-${require("os").platform()}`);
 }
+
+let username,
+  password,
+  userId,
+  userTkn,
+  stat = "Error";
 
 /*  This method gets activated when extension launches */
 async function activate(context) {
   generateDiagnoseLogFile();
-
-  let username, password, userId, userToken;
 
   // authenticate with slice dashboard system
   username = await vscode.window.showInputBox({
@@ -204,42 +227,15 @@ async function activate(context) {
     prompt: "Enter your Slice Dashboard Account Password",
   });
 
+  await updateConfigurations(username, password);
+
   vscode.window.showInformationMessage("Authenticating ... ");
-
-  let stat = "Error";
-  const resp = await axios({
-    method: "POST",
-    url: "https://slice--back.herokuapp.com/api/users/account/login",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    data: {
-      githubUsername: username,
-      password: password,
-    },
-  })
-    .then((response) => {
-      console.log(response);
-      if (response.status == 200) {
-        stat = "Success. You are Logged In!";
-        userId = response.data.userid;
-        userToken = response.data.token;
-      }
-    })
-    .catch((error) => console.log(error));
-
   vscode.window.showInformationMessage(stat);
 
   let subscriptions = context.subscriptions;
 
   // initialize the uploadObject and uploader
   uploadObject.init();
-
-  // update config first time
-  updateConfigurations();
-
-  // listening workspace configurations change
-  vscode.workspace.onDidChangeConfiguration(updateConfigurations);
 
   // tracking the file display when vscode open
   EventHandler.onActiveFileChange(

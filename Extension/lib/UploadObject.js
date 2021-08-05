@@ -20,10 +20,6 @@ let baseUploadObject = {
   proj: "",
   pcid: "",
 
-  vcs_type: "",
-  vcs_repo: "",
-  vcs_branch: "",
-
   line: 0,
   char: 0,
   r1: "1",
@@ -86,7 +82,11 @@ function generate(type, activeDocument, time, long) {
   obj.line = activeDocument.lineCount;
   obj.char = 0; //TODO: getText().length: But it affect extension efficiency
 
+  console.log(dumpUploadObject(obj));
+  // return obj;
+
   // convert object to csv
+
   try {
     let parser = new Parser();
     let csv = parser.parse(obj);
@@ -97,9 +97,6 @@ function generate(type, activeDocument, time, long) {
   }
 }
 
-// function dumpUploadObject(obj) {
-//   return (
-//     `${obj.type} from ${obj.time} long ${obj.long}; ${obj.file}(${obj.lang}; line: ${obj.line}}); ` +
-//     `vcs: ${obj.vcs_type}:${obj.vcs_repo}:${obj.vcs_branch}`
-//   );
-// }
+function dumpUploadObject(obj) {
+  return `${obj.type} from ${obj.time} long ${obj.long}; ${obj.file}(${obj.lang}; line: ${obj.line}}); `;
+}
