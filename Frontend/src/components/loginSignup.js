@@ -14,8 +14,10 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-
+import gif from '../assets/SLICE.gif'
+import signupgif from '../assets/signup.png'
 import { useHistory } from 'react-router-dom';
+
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -34,13 +36,23 @@ const useStyles = makeStyles((theme) => ({
     height: "100vh",
   },
   image: {
-    backgroundImage: "url(https://source.unsplash.com/random)",
+    backgroundImage: `url(${gif})`,
     backgroundRepeat: "no-repeat",
     backgroundColor:
       theme.palette.type === "light"
         ? theme.palette.grey[50]
         : theme.palette.grey[900],
     backgroundSize: "cover",
+    backgroundPosition: "center",
+  },
+  image2: {
+    backgroundImage: `url(${signupgif})`,
+    backgroundRepeat: "no-repeat",
+    backgroundColor:
+      theme.palette.type === "light"
+        ? theme.palette.grey[50]
+        : theme.palette.grey[900],
+    backgroundSize:"100% 100%",
     backgroundPosition: "center",
   },
   paper: {
@@ -51,7 +63,7 @@ const useStyles = makeStyles((theme) => ({
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
+    backgroundColor: theme.palette.primary.main,
   },
   form: {
     width: "100%", // Fix IE 11 issue.
@@ -78,7 +90,10 @@ const Login = () => {
       "password": document.getElementById("password").value
   };
   axios.post('https://slice--back.herokuapp.com/api/users/account/login/', logindata)
-            .then(response => {setSuccess(response.data.data.success )});
+            .then(response => {setSuccess(response.data.data.success ); 
+                localStorage.setItem("userid",response.data.data.userid );
+            localStorage.setItem("token", response.data.data.token);
+          });
   }
 
   if(success)
@@ -104,7 +119,7 @@ const Login = () => {
 }
     if(success)
     {
-    history.push("/home");
+    history.push("/");
 
     }
   }
@@ -194,10 +209,11 @@ const Login = () => {
           </Grid>
         </div>
       ) : (
-        <div className="signup">
-          <Container component="main" maxWidth="xs">
+        <div className="signup"  className={classes.image2} >
+          <Grid container component="main"  >
+          <Container component="main" maxWidth="xs" >
             <CssBaseline />
-            <div className={classes.paper}>
+            <div className={classes.paper} >
               <Avatar className={classes.avatar}>
                 <LockOutlinedIcon />
               </Avatar>
@@ -305,11 +321,13 @@ const Login = () => {
                   </Grid>
                 </Grid>
               </form>
+              <Box mt={4}>
+              <Copyright  />
+              </Box>
             </div>
-            <Box mt={5}>
-              <Copyright />
-            </Box>
-          </Container>
+            
+            </Container>
+          </Grid>
         </div>
       )}
     </div>
