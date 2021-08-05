@@ -34,6 +34,7 @@
 	},
 	"dependencies": {
 		"axios": "^0.21.1",
+		"json2csv": "^5.0.6",
 		"node-fetch": "^2.6.1",
 		"request": "^2.88.2"
 	}

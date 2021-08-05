@@ -173,7 +173,7 @@ let EventHandler = {
 function updateConfigurations() {
   // // Slice Config
   const extensionCfg = extHelpers.getConfig("slice");
-  const uploadToken = String(extensionCfg.get("uploadToken"));
+  const userToken = String(extensionCfg.get("userToken"));
   const computerId = String(extensionCfg.get("computerId"));
   let mtt = parseInt(extensionCfg.get("moreThinkingTime"));
   let uploadURL = `https://slice--back.herokuapp.com/api/data/exten/data/send/${userId}`;
@@ -182,7 +182,7 @@ function updateConfigurations() {
   if (mtt < -15 * SECOND) mtt = -15 * SECOND;
   moreThinkingTime = mtt;
 
-  uploader.set(uploadURL, uploadToken);
+  uploader.set(uploadURL, userToken);
   uploadObject.init(computerId || `unknown-${require("os").platform()}`);
 }
 
@@ -190,7 +190,7 @@ function updateConfigurations() {
 async function activate(context) {
   generateDiagnoseLogFile();
 
-  let username, password;
+  let username, password, userId, userToken;
 
   // authenticate with slice dashboard system
   username = await vscode.window.showInputBox({
@@ -220,7 +220,11 @@ async function activate(context) {
   })
     .then((response) => {
       console.log(response);
-      if (response.status == 200) stat = "Success, Logged In!";
+      if (response.status == 200) {
+        stat = "Success. You are Logged In!";
+        userId = response.data.userid;
+        userToken = response.data.token;
+      }
     })
     .catch((error) => console.log(error));
 
@@ -228,8 +232,8 @@ async function activate(context) {
 
   let subscriptions = context.subscriptions;
 
-  // initialize the uploadObject
-  // and uploader
+  // initialize the uploadObject and uploader
+  uploadObject.init();
 
   // update config first time
   updateConfigurations();

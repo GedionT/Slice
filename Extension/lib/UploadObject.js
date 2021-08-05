@@ -2,6 +2,7 @@
 
 const vscode = require("vscode");
 const helper = require("./VSCodeHelpers");
+const { Parser } = require("json2csv");
 
 const VSCODE_SETTINGS = "vscode-settings";
 const UNKNOWN = "unknown";
@@ -9,7 +10,7 @@ const UNKNOWN = "unknown";
 let lastActiveProject = UNKNOWN;
 
 let baseUploadObject = {
-  version: "4.0",
+  version: "1.0",
   token: "This value will be set up in Uploader module",
   type: "",
   time: "",
@@ -36,6 +37,7 @@ module.exports = { init, generateOpen, generateCode };
  * @param {string} [computerId]
  */
 function init(computerId) {
+  // workspaceFolder[0] alternative
   lastActiveProject = vscode.workspace.rootPath || UNKNOWN;
   baseUploadObject.pcid = computerId;
 }
@@ -83,6 +85,16 @@ function generate(type, activeDocument, time, long) {
   obj.long = long;
   obj.line = activeDocument.lineCount;
   obj.char = 0; //TODO: getText().length: But it affect extension efficiency
+
+  // convert object to csv
+  try {
+    let parser = new Parser();
+    let csv = parser.parse(obj);
+    console.log(csv);
+    return csv;
+  } catch (err) {
+    console.log(err);
+  }
 }
 
 // function dumpUploadObject(obj) {

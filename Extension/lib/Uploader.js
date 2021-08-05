@@ -1,6 +1,6 @@
 //@ts-check
 
-const vscode = require("vscode");
+// const vscode = require("vscode");
 const ext = require("./VSCodeHelpers");
 const Request = require("request");
 
@@ -13,19 +13,16 @@ let Q = [],
   uploading = 0,
   //Avoid Show error information too many times
   hadShowError = 0,
-  retryTime = 0,
-  uploadProxy = undefined;
+  retryTime = 0;
 
 let uploader = {
   /**
    * @param {string} url
    * @param {string} token
-   * @param {string|boolean|undefined} proxy
    */
-  set: function (url, token, proxy) {
+  set: function (url, token) {
     uploadURL = url;
     uploadToken = token;
-    uploadProxy = proxy;
   },
   upload: function (data) {
     Q.push(data);
@@ -46,7 +43,6 @@ function _upload() {
 
   /** @type {Request.CoreOptions} */
   const uploadOptions = { method: "POST", form: data, headers: uploadHeader };
-  if (typeof uploadProxy !== "undefined") uploadOptions.proxy = uploadProxy;
 
   Request(uploadURL, uploadOptions, function (err, res, bd) {
     uploading = 0;

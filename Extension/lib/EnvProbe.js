@@ -1,6 +1,6 @@
 /*
 	This module is used for probe extension running environment.
-	It can detect if modules are existing, i18n files exist, etc.
+	It can detect if modules are existing, etc.
 	And it can also generate diagnose file in the extension directory.
 */
 
@@ -31,14 +31,12 @@ function generateDiagnoseContent() {
   const vscode = safeRequire("vscode");
   const vscodeEnv = (vscode && vscode.env) || {};
   const packageJson = getPackageJson();
-  const i18nJson = getPackageNLSJson();
   return JSON.stringify(
     {
       vscodeAppName: vscodeEnv.appName,
       vscodeAppRoot: vscodeEnv.appRoot,
       vscodeLanguage: vscodeEnv.language,
       packageJsonOk: !!packageJson,
-      i18nJsonOk: !!i18nJson,
       dependencies: getDependencies(packageJson),
     },
     null,
@@ -66,15 +64,6 @@ function getDependencies(packageJson) {
 function getPackageJson() {
   try {
     return JSON.parse(fs.readFileSync(getFilePath("package.json"), "utf8"));
-  } catch (error) {
-    onError(error);
-    return null;
-  }
-}
-
-function getPackageNLSJson() {
-  try {
-    return JSON.parse(fs.readFileSync(getFilePath("package.nls.json"), "utf8"));
   } catch (error) {
     onError(error);
     return null;
