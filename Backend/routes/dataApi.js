@@ -9,7 +9,7 @@ DataApiRouter.post('/exten/data/send/:uid',uploadFile.single('test'),(request, r
   dataController.create(request);
 });
 
-DataApiRouter.post('/front/data/get/:uid', (request, response) => {
+DataApiRouter.post('/front/data/get/:uid/:type', (request, response) => {
     const dataController = new DataController(response);
     dataController.fetch(request);
 });

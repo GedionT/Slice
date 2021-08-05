@@ -53,10 +53,17 @@ export default class AccountService{
         throw error;
         }
     }
-    async verifyUserDetail(args) {
+    async verifyUserDetail(args,body,type) {
         try {
             let accountInfo = await this.repository.findUserDetail(args);
-            return accountInfo;
+            if(type=="info"){
+                return accountInfo;
+            }else if(type=="edit"){
+                accountInfo['goals'] = [{'day':'Monday','hours':body.goals[0]},{'day':'Tuesday','hours':body.goals[1]},
+                    {'day':'Wednesday','hours':body.goals[2]},{'day':'Thursday','hours':body.goals[3]},{'day':'Friday','hours':body.goals[4]},
+                        {'day':'Saturday','hours':body.goals[5]},{'day':'Sunday','hours':body.goals[6]}] 
+                return this.repository.edit(accountInfo);
+            }
         } catch (error) {
         throw (new Exceptions.ValidationException("Error finding user details"));
         }

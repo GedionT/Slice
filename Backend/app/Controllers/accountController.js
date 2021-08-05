@@ -48,7 +48,7 @@ export default class AccountController extends Controller {
     getInfo (request) {
       try {
         let value = {_id:request.params.uid};
-        const userInfo = this.service.verifyUserDetail(value);
+        const userInfo = this.service.verifyUserDetail(value,request.body,request.params.type);
         userInfo.then(res=>{
           this.sendResponse(res);
         })
