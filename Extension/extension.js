@@ -176,7 +176,7 @@ async function updateConfigurations(username, password) {
   let uName = username;
   let pwd = password;
 
-  const resp = await axios({
+  await axios({
     method: "POST",
     url: "https://slice--back.herokuapp.com/api/users/account/login",
     headers: {
