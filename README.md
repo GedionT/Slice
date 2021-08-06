@@ -44,3 +44,8 @@ Together, we can make this project **better** every day!
 
 `Slice` is free and open-source software licensed under the [MIT License](https://github.com/GedionT/Slice/blob/master/LICENSE). Official [logo](https://github.com) was created by [Gedion T.](https://github.com/GedionT), [Shivam](https://github.com/shivamsouravjha), and [Hargun](https://github.com/hkaur008.com) distributed under ...
 {"mode":"full","isActive":false}
+
+
+## Deployed Links
+- [Frontend](https://microteams.tech/)
+- [Backend](https://slice--back.herokuapp.com/)
