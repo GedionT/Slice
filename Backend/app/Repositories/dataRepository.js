@@ -17,7 +17,8 @@ export default class DataRepository {
     }
     async saveUserInfo(obj){
         try{
-            return await obj.save();
+            const saved =  await obj.save();
+            return saved;
         } catch (error) {
             console.log(error)
             return "error at adding"

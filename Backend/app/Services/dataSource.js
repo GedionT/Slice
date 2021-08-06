@@ -36,16 +36,22 @@ export default class DataService{
                         userInfo.current_week[DAY_TYPE[day]].reading_hours+=(Number(data_recieved[item]['long'])/1000)/3600;///adding data to the specified date reading hours
                     }else{
                         const langage = data_recieved[item]['lang'].substr(1,data_recieved[item]['lang'].length-2);
-                        if(userInfo.language[langage]){
+                        console.log("here",userInfo.language[langage])
+                        if(userInfo.language[langage]){                        console.log("heress")
+
                             userInfo.language[langage] += (Number(data_recieved[item]['long'])/1000)/3600;
-                        }else{
-                            userInfo.language[langage] = (Number(data_recieved[item]['long'])/1000)/3600;
+                        }else{                        console.log("herssssse")
+
+                            userInfo.language = {[langage] : (Number(data_recieved[item]['long'])/1000)/3600};
                         }
+                        console.log("hersse")
+
                         userInfo.current_week[DAY_TYPE[day]].word_typed+=(Number(data_recieved[item]['char']));
                         userInfo.current_week[DAY_TYPE[day]].coding_hours+=(Number(data_recieved[item]['long'])/1000)/3600;///adding data to the specified date coding hours
                     }
             }
             const result = await this.repository.saveUserInfo(userInfo);
+            console.log(result)
         }
         } catch (error) {
             console.log(error);
@@ -77,22 +83,67 @@ export default class DataService{
         throw error;
         }
     }
-    async send(uid) {
+    async send(uid) {           ///this is the prgress report of the user sent via sms
         try {
             const accountSid = process.env.TWILIO_ACCOUNT_SID;
             const authToken = process.env.TWILIO_AUTH_TOKEN;
             const client = require('twilio')(accountSid, authToken);
             const userInfo = await this.repository.findUserDetail(uid)
             if(userInfo['number']){
-            // client.messages
-            //   .create({
-            //      body: 'Welcome to Slice community! we hope to help you become a better verison of yourself',
-            //      from: `+${process.env.phone}`,
-            //      to: '+917762827770'
-            //    })
-            //   .then(message => console.log(message.sid)).catch(err =>
-            //       console.log(err)
-            //   );
+                let total_code_hours_current=0;
+                let total_read_hours_past=0;
+                let total_read_hours_current=0;
+                let total_code_hours_last=0;
+                let total_code_hours_goal=0;
+
+
+                for(var day in userInfo['current_week']){
+                    total_code_hours_current += userInfo.current_week[day]['coding_hours'] 
+                }
+
+                for(var day in userInfo['last_week']){
+                    total_code_hours_last += userInfo.last_week[day]['coding_hours'] 
+                }
+                for(var day in userInfo['goals']){
+                    total_code_hours_goal += userInfo.goals[day]['hours'] 
+                }
+                for(var day in userInfo['last_week']){
+                    total_read_hours_past += userInfo.current_week[day]['word_typed'] 
+                }
+                for(var day in userInfo['current_week']){
+                    total_read_hours_current += userInfo.current_week[day]['word_typed'] 
+                }
+
+
+                let message_goal ="";
+
+
+                if(total_code_hours_goal>total_code_hours_current){
+                    message_goal += `Unfortunately you lagged behind your weekly goal by ${total_code_hours_goal-total_code_hours_current} hours. `
+                }else{
+                    message_goal += `Wow! you crossed your goals by ${total_code_hours_current-total_code_hours_goal} hours. `
+                }
+                
+                if(total_code_hours_last>total_code_hours_current){
+                    message_goal += `Unfortunately you lagged behind your previous performance ${total_code_hours_last-total_code_hours_current} hours. `
+                }else{
+                    message_goal += `Wow! you crossed your last week performance by ${total_code_hours_current-total_code_hours_last} hours. `
+                }
+
+                if(total_read_hours_past>total_read_hours_current){
+                    message_goal += `Unfortunately you lagged behind your previous goal ${total_read_hours_past-total_read_hours_current} hours. `
+                }else{
+                    message_goal += `Wow! you crossed your last week performance by ${total_read_hours_current-total_read_hours_past} hours. `
+                }
+            client.messages
+              .create({
+                 body: `${message_goal}`,
+                 from: `+${process.env.phone}`,
+                 to: `${userInfo['number']}`
+               })
+              .then(message => console.log(message.sid)).catch(err =>
+                  console.log(err)
+              );
             }
             else{
                 return {"Message":"Please add your phone number"}

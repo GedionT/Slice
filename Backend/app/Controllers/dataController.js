@@ -10,8 +10,8 @@ export default class DataController extends Controller {
 
     create (request) {
         try{
-          this.service.create(request.file,request.params.uid)
-          this.sendResponse(request.test)
+          this.service.create(request.file,request.params.uid) //operating file but by using the uderid
+          this.sendResponse(request.test) ////sending a blank response of 20
         } catch (error) {
             this.handleException(error)
         }
