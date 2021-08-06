@@ -1,5 +1,5 @@
 import Joi from '@hapi/joi';
-
+//Validation the login and signup data
 export default {
     createAccount : Joi.object().keys({
         name: Joi.string().required(),
