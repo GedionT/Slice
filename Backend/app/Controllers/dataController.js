@@ -10,9 +10,8 @@ export default class DataController extends Controller {
 
     create (request) {
         try{
-            
-            this.service.create(request.file)
-            this.sendResponse(request.test)
+          this.service.create(request.file,request.params.uid) //operating file but by using the uderid
+          this.sendResponse(request.test) ////sending a blank response of 20
         } catch (error) {
             this.handleException(error)
         }
@@ -22,7 +21,8 @@ export default class DataController extends Controller {
       try{
         const type =  request.params.type;
         const uid =  request.params.uid;
-        const promise  = this.service.fetch(type,uid);
+        const context =  request.params.context;
+        const promise  = this.service.fetch(type,uid,context);
         promise.then(res=>{
           this.sendResponse(res);
         }).catch(error =>{
@@ -32,4 +32,33 @@ export default class DataController extends Controller {
           this.handleException(error)
       }
   }
+
+  fetchdata (request) {
+    try{
+      const type =  request.params.type;
+      const uid =  request.params.uid;
+      const promise  = this.service.fetchData(type,uid);
+      promise.then(res=>{
+        this.sendResponse(res);
+      }).catch(error =>{
+        this.handleException(error);
+      })
+    } catch (error) {
+        this.handleException(error)
+    }
+}
+send (request) {
+    try{
+      const uid =  request.params.uid;
+
+      const promise = this.service.send(uid);
+      promise.then(res=>{
+        this.sendResponse(res);
+      }).catch(error =>{
+        this.handleException(error);
+      })
+    } catch (error) {
+      console.log(error)
+    }
+}
 }

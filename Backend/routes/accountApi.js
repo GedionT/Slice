@@ -3,16 +3,25 @@ import AccountController from '../app/Controllers/accountController';
 
 const AccountApiRouter = express.Router();
 
-AccountApiRouter.post('/account/signup', (request, response) => {
+
+//Routes to signup data
+AccountApiRouter.post('/account/signup', (request, response) => {       
   const accountController = new AccountController(response);
   accountController.addAccount(request);
 });
 
+AccountApiRouter.post('/account/login', (request, response) => {       
+  const accountController = new AccountController(response);
+  accountController.loginAccount(request);
+});
+
+//Edit account details(Here goals only)
 AccountApiRouter.post('/account/:uid/:type', (request, response) => {
   const accountController = new AccountController(response);
   accountController.getInfo(request);
 });
 
+//Routes to get account details
 AccountApiRouter.post('/account/:uid/info', (request, response) => {
   const accountController = new AccountController(response);
   accountController.getInfo(request);

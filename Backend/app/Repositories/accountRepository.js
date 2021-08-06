@@ -1,6 +1,6 @@
 import UserModel from "../Models/userModel";
 import jwt from 'jsonwebtoken';
-
+import {Language} from '../Constants/constants';
 export default class AccountRepository {
     async findUserDetail(obj){
         try {
@@ -28,15 +28,28 @@ export default class AccountRepository {
         }
     }
     async addUser(obj){
-        obj['goals'] = [{'day':'Monday','hours':0},{'day':'Tuesday','hours':0},
-        {'day':'Wednesday','hours':0},{'day':'Thursday','hours':0},{'day':'Friday','hours':0},
-        {'day':'Saturday','hours':0},{'day':'Sunday','hours':0}] 
-        obj['current_week'] = [{'day':'Monday','hours':0},{'day':'Tuesday','hours':0},
-        {'day':'Wednesday','hours':0},{'day':'Thursday','hours':0},{'day':'Friday','hours':0},
-        {'day':'Saturday','hours':0},{'day':'Sunday','hours':0}]        
-        obj['last_week'] = [{'day':'Monday','hours':0},{'day':'Tuesday','hours':0},
-        {'day':'Wednesday','hours':0},{'day':'Thursday','hours':0},{'day':'Friday','hours':0},
-        {'day':'Saturday','hours':0},{'day':'Sunday','hours':0}]
+        obj['goals'] = [{'day':'Mo','hours':0},{'day':'Tu','hours':0},
+        {'day':'We','hours':0},{'day':'Th','hours':0},{'day':'Fr','hours':0},
+        {'day':'Sa','hours':0},{'day':'Su','hours':0}] 
+        obj['current_week'] = [
+        {'day':'Mo','coding_hours':0,'reading_hours':0,'lines':0,'word_typed':0},
+        {'day':'Tu','coding_hours':0,'reading_hours':0,'lines':0,'word_typed':0},
+        {'day':'We','coding_hours':0,'reading_hours':0,'lines':0,'word_typed':0},
+        {'day':'Th','coding_hours':0,'reading_hours':0,'lines':0,'word_typed':0},
+        {'day':'Fr','coding_hours':0,'reading_hours':0,'lines':0,'word_typed':0},
+        {'day':'Sa','coding_hours':0,'reading_hours':0,'lines':0,'word_typed':0},
+        {'day':'Su','coding_hours':0,'reading_hours':0,'lines':0,'word_typed':0}
+    ]        
+        obj['last_week'] = [
+            {'day':'Mo','coding_hours':0,'reading_hours':0,'lines':0,'word_typed':0},
+            {'day':'Tu','coding_hours':0,'reading_hours':0,'lines':0,'word_typed':0},
+            {'day':'We','coding_hours':0,'reading_hours':0,'lines':0,'word_typed':0},
+            {'day':'Th','coding_hours':0,'reading_hours':0,'lines':0,'word_typed':0},
+            {'day':'Fr','coding_hours':0,'reading_hours':0,'lines':0,'word_typed':0},
+            {'day':'Sa','coding_hours':0,'reading_hours':0,'lines':0,'word_typed':0},
+            {'day':'Su','coding_hours':0,'reading_hours':0,'lines':0,'word_typed':0}
+        ]
+        obj['language'] = Language;
         const userModel = new UserModel(obj)
         let userDetails;
         let token;
@@ -46,7 +59,7 @@ export default class AccountRepository {
         } catch (error) {
             return "error at adding"
         }
-        return {"success":true,"token":"token"};
+        return {"success":true,"token":token,userId:userDetails._id};
     }
 
 }

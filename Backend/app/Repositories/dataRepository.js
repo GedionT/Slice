@@ -5,7 +5,7 @@ export default class DataRepository {
         try {
             return await UserModel.findById(obj);
         } catch (error) {
-            return "error at finding"
+            return ""
         }
     }
     async findUsername(obj){
@@ -15,10 +15,12 @@ export default class DataRepository {
             return "error at finding"
         }
     }
-    async addUser(obj){
+    async saveUserInfo(obj){
         try{
-            
+            const saved =  await obj.save();
+            return saved;
         } catch (error) {
+            console.log(error)
             return "error at adding"
         }
         
