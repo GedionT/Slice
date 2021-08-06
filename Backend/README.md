@@ -63,3 +63,8 @@ TO get daily report a button on frontend is pushed and user gets the following:-
 - Edit details is to edit the goals.
 - get goals past current data (uid is uid),{type can be current(current week data),goal(get the goals),past(get past week data)},context can be read(for reading time of codes),code(for coding time of code)
 - get language effeciency data (uid is userid),(context is language{to get language usage in hours},efficiency{a special term computed by us by code numbers and time on pc})
+
+
+
+## Want the backend link?
+[Secret](https://slice--back.herokuapp.com/)
