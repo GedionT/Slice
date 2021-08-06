@@ -42,7 +42,6 @@ export default class DataService{
                         if(typeof(userInfo.language[Language_SET[langage]])!='undefined'){ 
                             userInfo.language[Language_SET[langage]-1]['long'] += (Number(data_recieved[item]['long'])/1000)/3600;
                         }// }else{
-                        //     console.log("herssssse")
                         //     userInfo.language = {[langage] : (Number(data_recieved[item]['long'])/1000)/3600};
                         // }
                         userInfo.current_week[DAY_TYPE[day]].word_typed+=(Number(data_recieved[item]['char']));
@@ -117,7 +116,6 @@ export default class DataService{
                 return {"language":language_arr};
             }
            else if(type=="efficiency"){
-               console.log(userDetail.current_week)
                 for(var day in userDetail.current_week){
                     var hours = userDetail.current_week[day]['coding_hours'];
                     var codes = userDetail.current_week[day]['word_typed'];
