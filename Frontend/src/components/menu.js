@@ -8,11 +8,20 @@ import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
+//icons
 import HomeIcon from '@material-ui/icons/Home';
+import TrackChangesIcon from '@material-ui/icons/TrackChanges';
+import AssessmentIcon from '@material-ui/icons/Assessment';
+import ChatIcon from '@material-ui/icons/Chat';
+import GitHubIcon from '@material-ui/icons/GitHub';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+
 import { grey } from '@material-ui/core/colors';
 import MenuIcon from '@material-ui/icons/Menu';
+//usehistory to redirect
+import { useHistory } from 'react-router-dom';
+
 
 const useStyles = makeStyles({
     list: {
@@ -23,8 +32,11 @@ const useStyles = makeStyles({
     },
 });
 
+// sidenav 
 const Menu = () => {
+    let history = useHistory();
     const classes = useStyles();
+    //navbar side = left
     const [state, setState] = React.useState({
         left: false,
     });
@@ -37,6 +49,15 @@ const Menu = () => {
         setState({ ...state, [anchor]: open });
     };
 
+    //logout function
+   const logout =()=>{
+    localStorage.removeItem("userid");
+    localStorage.removeItem("token");
+    history.push("/");
+   }
+
+
+    // list of items of side nav
     const list = (anchor) => (
         <div
             className={clsx(classes.list, {
@@ -47,21 +68,38 @@ const Menu = () => {
             onKeyDown={toggleDrawer(anchor, false)}
         >
             <List>
-                {['Home', 'Weekly Report', 'Progess Report', 'Chat Rooms'].map((text, index) => (
-                    <ListItem button key={text}>
-                        <ListItemIcon>{index % 2 === 0 ? <HomeIcon /> : <MailIcon />}</ListItemIcon>
-                        <ListItemText primary={text} />
+                
+                    <ListItem button key="Home" onClick={()=>{history.push("/home");}}>
+                        <ListItemIcon><HomeIcon /></ListItemIcon>
+                        <ListItemText primary="Home" />
                     </ListItem>
-                ))}
+                    <ListItem button key="Weekly Goals" onClick={()=>{history.push("/goals");}}>
+                        <ListItemIcon><TrackChangesIcon /></ListItemIcon>
+                        <ListItemText primary="Weekly Goals" />
+                    </ListItem>
+                    <ListItem button key="Progess Report" onClick={()=>{history.push("/progress");}}>
+                        <ListItemIcon><AssessmentIcon /></ListItemIcon>
+                        <ListItemText primary="Progess Report" />
+                    </ListItem>
+                    <ListItem button key="Chat Rooms" onClick={()=>{history.push("/chat");}}>
+                        <ListItemIcon><ChatIcon /></ListItemIcon>
+                        <ListItemText primary="Chat Rooms" />
+                    </ListItem>
             </List>
             <Divider />
             <List>
-                {['GitHub Report', 'User Profile', 'Logout'].map((text, index) => (
-                    <ListItem button key={text}>
-                        <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                        <ListItemText primary={text} />
+                    <ListItem button key="GitHub Report" onClick={()=>{history.push("/github");}}>
+                        <ListItemIcon><GitHubIcon /></ListItemIcon>
+                        <ListItemText primary="GitHub Report" />
                     </ListItem>
-                ))}
+                    <ListItem button key="User Profile" onClick={()=>{history.push("/profile");}}>
+                        <ListItemIcon><AccountCircleIcon /></ListItemIcon>
+                        <ListItemText primary="User Profile" />
+                    </ListItem>
+                    <ListItem button key="Logout" onClick={logout}>
+                        <ListItemIcon>< ExitToAppIcon /></ListItemIcon>
+                        <ListItemText primary="Logout" />
+                    </ListItem>
             </List>
         </div>
     );

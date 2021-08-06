@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import ChatBot from 'react-simple-chatbot'
 import Botpic from '../assets/slice.png'
 import { ThemeProvider } from 'styled-components'
@@ -29,18 +29,11 @@ const config = {
 }
 
 const Chatbot = (props) => {
-  let [showChat, setShowChat] = useState(false)
-
-  const startChat = () => {
-    setShowChat(true)
-  }
-  const hideChat = () => {
-    setShowChat(false)
-  }
+  
 
   return (
     <ThemeProvider theme={theme}>
-      <div style={{ display: showChat ? 'none' : '' }}>
+      <div>
         <ChatBot
           speechSynthesis={{ enable: true, lang: 'en-US' }}
           recognitionEnable={true}
@@ -130,17 +123,6 @@ const Chatbot = (props) => {
           ]}
           {...config}
         />
-      </div>
-      <div>
-        {!showChat ? (
-          <button className="btn" onClick={() => startChat()}>
-            <i className="fa fa-minus"></i>
-          </button>
-        ) : (
-          <button className="btn" onClick={() => hideChat()}>
-            <i className="fa fa-plus"></i>
-          </button>
-        )}
       </div>
     </ThemeProvider>
   )

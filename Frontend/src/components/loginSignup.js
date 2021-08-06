@@ -89,10 +89,13 @@ const Login = () => {
       "githubUsername": document.getElementById("github").value ,
       "password": document.getElementById("password").value
   };
+  localStorage.setItem("github", document.getElementById("github").value);
   axios.post('https://slice--back.herokuapp.com/api/users/account/login/', logindata)
             .then(response => {setSuccess(response.data.data.success ); 
-                localStorage.setItem("userid",response.data.data.userid );
-            localStorage.setItem("token", response.data.data.token);
+              if(success)
+               { localStorage.setItem("userid",response.data.data.userid );
+                localStorage.setItem("token", response.data.data.token);
+               }
           });
   }
 
