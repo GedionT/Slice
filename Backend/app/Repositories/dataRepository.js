@@ -5,7 +5,7 @@ export default class DataRepository {
         try {
             return await UserModel.findById(obj);
         } catch (error) {
-            return "error at finding"
+            return ""
         }
     }
     async findUsername(obj){

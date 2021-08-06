@@ -1,6 +1,6 @@
 import DataRepository from '../Repositories/dataRepository';
 import csv from 'csvtojson';
-import {DAY_TYPE} from '../Constants/constants';
+import {DAY_TYPE,MONDAY} from '../Constants/constants';
 const fs=require('fs');
 const { promisify } = require('util')
 const unlinkAsync = promisify(fs.unlink)
@@ -18,30 +18,35 @@ export default class DataService{
                 })
             await unlinkAsync(args.path)
             const userInfo = await this.repository.findUserDetail(uid);
-            for(var item in data_recieved){
-                var day = Date(data_recieved[item]['time']).substr(0,2);
-                if(data_recieved[item]['type']=="'open'"){
-                    const langage = data_recieved[item]['lang'].substr(1,data_recieved[item]['lang'].length-2);
-                    console.log((userInfo.language[langage]),langage)
-                    if(userInfo.language[langage]){
-                        userInfo.language[langage] += (Number(data_recieved[item]['long'])/1000)/3600;
-                    }else{
-                        userInfo.language[langage] = (Number(data_recieved[item]['long'])/1000)/3600;
+            console.log(userInfo)
+            if(userInfo){
+                for(var item in data_recieved){
+                    var day = Date(data_recieved[item]['time']).substr(0,2);
+                    if(day=='Mo'){
+                        userInfo['last_week']=userInfo['current_week'];
+                        userInfo['current_week'] = MONDAY;
                     }
-                    userInfo.current_week[DAY_TYPE[day]].reading_hours+=(Number(data_recieved[item]['long'])/1000)/3600;///adding data to the specified date reading hours
-                }else{
-                    const langage = data_recieved[item]['lang'].substr(1,data_recieved[item]['lang'].length-2);
-                    if(userInfo.language[langage]){
-                        userInfo.language[langage] += (Number(data_recieved[item]['long'])/1000)/3600;
+                    if(data_recieved[item]['type']=="'open'"){
+                        const langage = data_recieved[item]['lang'].substr(1,data_recieved[item]['lang'].length-2);
+                        if(userInfo.language[langage]){
+                            userInfo.language[langage] += (Number(data_recieved[item]['long'])/1000)/3600;
+                        }else{
+                            userInfo.language[langage] = (Number(data_recieved[item]['long'])/1000)/3600;
+                        }
+                        userInfo.current_week[DAY_TYPE[day]].reading_hours+=(Number(data_recieved[item]['long'])/1000)/3600;///adding data to the specified date reading hours
                     }else{
-                        userInfo.language[langage] = (Number(data_recieved[item]['long'])/1000)/3600;
+                        const langage = data_recieved[item]['lang'].substr(1,data_recieved[item]['lang'].length-2);
+                        if(userInfo.language[langage]){
+                            userInfo.language[langage] += (Number(data_recieved[item]['long'])/1000)/3600;
+                        }else{
+                            userInfo.language[langage] = (Number(data_recieved[item]['long'])/1000)/3600;
+                        }
+                        userInfo.current_week[DAY_TYPE[day]].word_typed+=(Number(data_recieved[item]['char']));
+                        userInfo.current_week[DAY_TYPE[day]].coding_hours+=(Number(data_recieved[item]['long'])/1000)/3600;///adding data to the specified date coding hours
                     }
-                    userInfo.current_week[DAY_TYPE[day]].word_typed+=(Number(data_recieved[item]['char']));
-                    userInfo.current_week[DAY_TYPE[day]].coding_hours+=(Number(data_recieved[item]['long'])/1000)/3600;///adding data to the specified date coding hours
-                }
             }
             const result = await this.repository.saveUserInfo(userInfo);
-            console.log(result)
+        }
         } catch (error) {
             console.log(error);
         }
