@@ -6,8 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "apis": "npx babel-node --presets=@babel/preset-env -- entrypoint.js",
-    "dev": "nodemon  --exec npm-run-all --parallel apis",
-    "start": "npm-run-all --parallel apis"
+    "start": "nodemon  --exec npm-run-all --parallel apis",
+    "dev": "npm-run-all --parallel apis"
   },
   "author": "",
   "license": "ISC",
