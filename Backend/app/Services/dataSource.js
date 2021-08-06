@@ -23,6 +23,7 @@ export default class DataService{
                 for(var item in data_recieved){
                     var day = Date(data_recieved[item]['time']).substr(0,2);
                     if(day=='Mo'){
+                        await this.send(userInfo._id)
                         userInfo['last_week']=userInfo['current_week'];
                         userInfo['current_week'] = MONDAY;
                     }
