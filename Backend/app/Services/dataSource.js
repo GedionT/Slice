@@ -105,16 +105,18 @@ export default class DataService{
         try {
             const userDetail = await this.repository.findUserDetail(uid);
             const language_arr=[];
+            const hours_arr=[];
             const effeciency=[];
             if(type=="language"){
                 for(var index in userDetail.language){
                     if(userDetail.language[index]['long']){
                         var language_ = userDetail.language[index]['language'];
                         var hours = userDetail.language[index]['long'];
-                        language_arr.push({[language_]:hours})
+                        language_arr.push(language_)
+                        hours_arr.push(hours)
                     }
                 }
-                return {"language":language_arr};
+                return {"language":language_arr,"hours":hours_arr};
             }
            else if(type=="efficiency"){
                 for(var day in userDetail.current_week){
