@@ -95,7 +95,13 @@ const Profile = () => {
     localStorage.removeItem("token");
     history.push("/");
   };
-
+const sendNotification = ()=>{
+  axios
+      .post(
+        `https://slice--back.herokuapp.com/api/data/front/data/reply/${userid}/send`
+      )
+      .then((response) => {console.log("Notification sent !")});
+}
   return (
     <div className="Main" className={classes.image2}>
       <AppBar position="static">
@@ -166,13 +172,21 @@ const Profile = () => {
                     />
                   </ListItem>
                 </List>
+                <Button
+                  
+                  variant="contained"
+                  color="primary"
+                  className={classes.submit}
+                  onClick={sendNotification}
+                >Send Notification !</Button>
               </Paper>
             </Grid>
           </Grid>
         </Container>
+      
       </div>
-
-      <Chatbot />
+   
+                      <Chatbot />
     </div>
   );
 };

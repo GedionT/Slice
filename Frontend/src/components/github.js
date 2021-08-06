@@ -61,7 +61,7 @@ const GitHubReport = () => {
    
       <Container>
       <Grid container spacing={3}>
-        <Grid item xs={12}>
+        <Grid item xs={12} sm={12}>
           <Paper className={classes.paper}>
           <img src={`https://activity-graph.herokuapp.com/graph?username=${localStorage.getItem("github")}&theme=react-dark`} />
           </Paper>

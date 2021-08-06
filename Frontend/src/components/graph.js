@@ -108,11 +108,11 @@ axios.post(`https://slice--back.herokuapp.com/api/data/front/data/get/${userid}/
   return (
     <div className="Graph">
 
-<div className={classes.root}>
+<div className={classes.root}> 
   <Container>
       <Grid container spacing={3}>
         <Grid item xs={12}>
-          <Paper className={classes.paper}>24 Hour Report
+          <Paper className={classes.paper}>24 Hour Report 
           </Paper>
         </Grid>
         <Grid item xs={12} sm={6}>
