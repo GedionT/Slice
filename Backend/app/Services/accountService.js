@@ -2,7 +2,7 @@ import AccountRepository from '../Repositories/accountRepository';
 import * as Exceptions from '../Exceptions/exceptions';
 import bycrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-
+require("dotenv").config();
 export default class AccountService{
     constructor() {
         this.repository = new AccountRepository();
@@ -23,6 +23,20 @@ export default class AccountService{
             let hasedPassword = await bycrypt.hash(args.password,12)
             args.password = hasedPassword
             let accountInfo = await this.repository.addUser(args);
+            if(number){
+                const accountSid = process.env.TWILIO_ACCOUNT_SID;
+                const authToken = process.env.TWILIO_AUTH_TOKEN;
+                const client = require('twilio')(accountSid, authToken);
+                client.messages
+            .create({
+               body: `Hello ${args.name}! welcome to the Slice Community! Let's grow together`,
+               from: `+${process.env.phone}`,
+               to: `${number}`
+             })
+            .then(message => console.log(message.sid)).catch(err =>
+                console.log(err)
+            );
+            }
             return accountInfo
         } catch (error) {
         throw error;
