@@ -58,7 +58,7 @@ export default class DataService{
             const goals=[];
             const past=[];
             for(var day in userDetail.current_week){
-                daily.push(userDetail.current_week[day]['hours'])
+                daily.push(userDetail.current_week[day]['coding_hours'])
             }
             if(type=="current"){
                 return {daily_hours:daily};
@@ -69,7 +69,7 @@ export default class DataService{
                 return {daily_hours:daily,goals:goals};
             }else if(type=="past"){
                 for(var day in userDetail.last_week){
-                    past.push(userDetail.last_week[day]['hours'])
+                    past.push(userDetail.last_week[day]['coding_hours'])
                 }
                 return {daily_hours:daily,last_week:past};
             }
