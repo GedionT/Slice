@@ -1,6 +1,6 @@
 import DataRepository from '../Repositories/dataRepository';
 import csv from 'csvtojson';
-import {DAY_TYPE,MONDAY} from '../Constants/constants';
+import {DAY_TYPE,MONDAY,Language_SET} from '../Constants/constants';
 const fs=require('fs');
 const { promisify } = require('util')
 const unlinkAsync = promisify(fs.unlink)
@@ -36,50 +36,66 @@ export default class DataService{
                         userInfo.current_week[DAY_TYPE[day]].reading_hours+=(Number(data_recieved[item]['long'])/1000)/3600;///adding data to the specified date reading hours
                     }else{
                         const langage = data_recieved[item]['lang'].substr(1,data_recieved[item]['lang'].length-2);
-                        console.log("here",userInfo.language[langage])
-                        if(userInfo.language[langage]){                        console.log("heress")
+                        
 
-                            userInfo.language[langage] += (Number(data_recieved[item]['long'])/1000)/3600;
-                        }else{                        console.log("herssssse")
-
-                            userInfo.language = {[langage] : (Number(data_recieved[item]['long'])/1000)/3600};
-                        }
-                        console.log("hersse")
-
+                        ///adding the language hours
+                        if(typeof(userInfo.language[Language_SET[langage]])!='undefined'){ 
+                            userInfo.language[Language_SET[langage]-1]['long'] += (Number(data_recieved[item]['long'])/1000)/3600;
+                        }// }else{
+                        //     console.log("herssssse")
+                        //     userInfo.language = {[langage] : (Number(data_recieved[item]['long'])/1000)/3600};
+                        // }
                         userInfo.current_week[DAY_TYPE[day]].word_typed+=(Number(data_recieved[item]['char']));
                         userInfo.current_week[DAY_TYPE[day]].coding_hours+=(Number(data_recieved[item]['long'])/1000)/3600;///adding data to the specified date coding hours
                     }
+            
+            // const result = await this.repository.saveUserInfo(userInfo);
+                    const result = await this.repository.saveUserInfo(userInfo);
+                }
             }
-            const result = await this.repository.saveUserInfo(userInfo);
-            console.log(result)
-        }
         } catch (error) {
             console.log(error);
         }
     }
-    async fetch(type,uid) {
+    async fetch(type,uid,context) {
         try {
             const userDetail = await this.repository.findUserDetail(uid);
             const daily=[];
             const goals=[];
             const past=[];
+            const daily_read=[];
+            const past_read=[];
+
+
             for(var day in userDetail.current_week){
                 daily.push(userDetail.current_week[day]['coding_hours'])
             }
-            if(type=="current"){
-                return {daily_hours:daily};
-            }else if(type=="goal"){
-                for(var day in userDetail.goals){
-                    goals.push(userDetail.goals[day]['hours'])
+            if(context=="code"){
+                if(type=="current"){
+                    return {daily_hours:daily};
+                }else if(type=="goal"){
+                    for(var day in userDetail.goals){
+                        goals.push(userDetail.goals[day]['hours'])
+                    }
+                    return {daily_hours:daily,goals:goals};
+                }else if(type=="past"){
+                    for(var day in userDetail.last_week){
+                        past.push(userDetail.last_week[day]['coding_hours'])
+                    }
+                    return {daily_hours:daily,last_week:past};
                 }
-                return {daily_hours:daily,goals:goals};
-            }else if(type=="past"){
-                for(var day in userDetail.last_week){
-                    past.push(userDetail.last_week[day]['coding_hours'])
-                }
-                return {daily_hours:daily,last_week:past};
             }
-        } catch (error) {
+           else if(context=="read"){
+                for(var day in userDetail.current_week){
+                    daily_read.push(userDetail.current_week[day]['reading_hours'])
+                }
+                for(var day in userDetail.last_week){
+                    past_read.push(userDetail.last_week[day]['reading_hours'])
+                }
+                console.log(daily_read,past_read)
+                return {daily_read:daily_read,past_read:past_read};
+            } 
+    }catch (error) {
         throw error;
         }
     }

@@ -21,7 +21,8 @@ export default class DataController extends Controller {
       try{
         const type =  request.params.type;
         const uid =  request.params.uid;
-        const promise  = this.service.fetch(type,uid);
+        const context =  request.params.context;
+        const promise  = this.service.fetch(type,uid,context);
         promise.then(res=>{
           this.sendResponse(res);
         }).catch(error =>{

@@ -1,6 +1,6 @@
 import UserModel from "../Models/userModel";
 import jwt from 'jsonwebtoken';
-
+import {Language} from '../Constants/constants';
 export default class AccountRepository {
     async findUserDetail(obj){
         try {
@@ -49,10 +49,7 @@ export default class AccountRepository {
             {'day':'Sa','coding_hours':0,'reading_hours':0,'lines':0,'word_typed':0},
             {'day':'Su','coding_hours':0,'reading_hours':0,'lines':0,'word_typed':0}
         ]
-        obj['language'] = {
-            Javascript:0,Python:0,Golang:0,Cpp:0
-        }
-
+        obj['language'] = Language;
         const userModel = new UserModel(obj)
         let userDetails;
         let token;

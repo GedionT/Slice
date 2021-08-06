@@ -12,7 +12,7 @@ const userschema = new schema({
     goals:[{day:String,hours:Number}],
     current_week:[{day:String,coding_hours:Number,reading_hours:Number,lines:Number,word_typed:Number}],
     last_week:[{day:String,coding_hours:Number,reading_hours:Number,lines:Number,word_typed:Number}],
-    language: {type :schema.Types.Object}
+    language: [{language:String,long:Number}]
 },{
     versionKey: false 
   });
