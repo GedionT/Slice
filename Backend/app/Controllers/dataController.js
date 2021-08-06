@@ -32,7 +32,22 @@ export default class DataController extends Controller {
           this.handleException(error)
       }
   }
-  send (request) {
+
+  fetchdata (request) {
+    try{
+      const type =  request.params.type;
+      const uid =  request.params.uid;
+      const promise  = this.service.fetchData(type,uid);
+      promise.then(res=>{
+        this.sendResponse(res);
+      }).catch(error =>{
+        this.handleException(error);
+      })
+    } catch (error) {
+        this.handleException(error)
+    }
+}
+send (request) {
     try{
       const uid =  request.params.uid;
 

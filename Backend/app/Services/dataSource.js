@@ -50,7 +50,7 @@ export default class DataService{
                     }
             
             // const result = await this.repository.saveUserInfo(userInfo);
-                    const result = await this.repository.saveUserInfo(userInfo);
+                     await this.repository.saveUserInfo(userInfo);
                 }
             }
         } catch (error) {
@@ -99,6 +99,43 @@ export default class DataService{
         throw error;
         }
     }
+
+
+    async fetchData(type,uid) {
+        try {
+            const userDetail = await this.repository.findUserDetail(uid);
+            const language_arr=[];
+            const effeciency=[];
+            if(type=="language"){
+                for(var index in userDetail.language){
+                    if(userDetail.language[index]['long']){
+                        var language_ = userDetail.language[index]['language'];
+                        var hours = userDetail.language[index]['long'];
+                        language_arr.push({[language_]:hours})
+                    }
+                }
+                return {"language":language_arr};
+            }
+           else if(type=="efficiency"){
+               console.log(userDetail.current_week)
+                for(var day in userDetail.current_week){
+                    var hours = userDetail.current_week[day]['coding_hours'];
+                    var codes = userDetail.current_week[day]['word_typed'];
+                    if(hours==0){
+                        effeciency.push(0);
+                    }else{
+                        effeciency.push(codes/hours);
+                    }
+                }
+                return {"effeciency":effeciency};
+            } 
+    }catch (error) {
+        throw error;
+        }
+    }
+
+
+
     async send(uid) {           ///this is the prgress report of the user sent via sms
         try {
             const accountSid = process.env.TWILIO_ACCOUNT_SID;

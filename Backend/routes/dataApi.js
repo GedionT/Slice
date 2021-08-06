@@ -13,8 +13,15 @@ DataApiRouter.post('/exten/data/send/:uid',uploadFile.single('data-patch'),(requ
 
 //Routes for frontend to access the data
 DataApiRouter.post('/front/data/get/:uid/:type/:context', (request, response) => {
-    const dataController = new DataController(response);
-    dataController.fetch(request);
+  const dataController = new DataController(response);
+  dataController.fetch(request);
+});
+
+
+//Routes for frontend to access the language
+DataApiRouter.post('/front/data/get/:uid/:type', (request, response) => {
+  const dataController = new DataController(response);
+  dataController.fetchdata(request);
 });
 
 
