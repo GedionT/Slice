@@ -19,7 +19,6 @@ export default class DataService{
                 })
             await unlinkAsync(args.path)
             const userInfo = await this.repository.findUserDetail(uid);
-            console.log(userInfo)
             if(userInfo){
                 for(var item in data_recieved){
                     var day = Date(data_recieved[item]['time']).substr(0,2);

@@ -10,8 +10,7 @@ export default class DataController extends Controller {
 
     create (request) {
         try{
-            
-          this.service.create(request.file,request.params)
+          this.service.create(request.file,request.params.uid)
           this.sendResponse(request.test)
         } catch (error) {
             this.handleException(error)
