@@ -1,10 +1,7 @@
 import DataRepository from '../Repositories/dataRepository';
-import * as Exceptions from '../Exceptions/exceptions';
 import csv from 'csvtojson';
-
+import {DAY_TYPE} from '../Constants/constants';
 const fs=require('fs');
-var path = require('path');
-import parse from 'csv-parse';
 const { promisify } = require('util')
 const unlinkAsync = promisify(fs.unlink)
 
@@ -12,15 +9,26 @@ export default class DataService{
     constructor() {
         this.repository = new DataRepository();
     }
-    async create (args) {
+    async create (args,uid) {
         try {
-            console.log(args)
-            await csv()
+            const data_recieved = await csv()
                 .fromFile(args.path)
                 .then(function(jsonArrayObj){ //when parse finished, result will be emitted here.
-                    console.log(jsonArrayObj); 
+                    return jsonArrayObj;
                 })
             await unlinkAsync(args.path)
+            const userInfo = await this.repository.findUserDetail(uid);
+            for(var item in data_recieved){
+                var day = Date(data_recieved[item]['time']).substr(0,2);
+                if(data_recieved[item]['type']=="'open'"){
+                    userInfo.current_week[DAY_TYPE[day]].reading_hours+=(Number(data_recieved[item]['long'])/1000)/3600;///adding data to the specified date reading hours
+                }else{
+
+                    userInfo.current_week[DAY_TYPE[day]].coding_hours+=(Number(data_recieved[item]['long'])/1000)/3600;///adding data to the specified date coding hours
+                }
+            }
+            // const result = await this.repository.saveUserInfo(userInfo);
+            console.log(userInfo)
         } catch (error) {
             console.log(error);
             throw error;

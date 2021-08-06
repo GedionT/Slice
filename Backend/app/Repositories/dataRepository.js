@@ -15,9 +15,9 @@ export default class DataRepository {
             return "error at finding"
         }
     }
-    async addUser(obj){
+    async saveUserInfo(obj){
         try{
-            
+            return await obj.save();
         } catch (error) {
             return "error at adding"
         }

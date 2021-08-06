@@ -59,9 +59,9 @@ export default class AccountService{
             if(type=="info"){
                 return accountInfo;
             }else if(type=="edit"){
-                accountInfo['goals'] = [{'day':'Monday','hours':body.goals[0]},{'day':'Tuesday','hours':body.goals[1]},
-                    {'day':'Wednesday','hours':body.goals[2]},{'day':'Thursday','hours':body.goals[3]},{'day':'Friday','hours':body.goals[4]},
-                        {'day':'Saturday','hours':body.goals[5]},{'day':'Sunday','hours':body.goals[6]}] 
+                accountInfo['goals'] = [{'day':'Mo','hours':body.goals[0]},{'day':'Tu','hours':body.goals[1]},
+                    {'day':'We','hours':body.goals[2]},{'day':'Th','hours':body.goals[3]},{'day':'Fr','hours':body.goals[4]},
+                        {'day':'Sa','hours':body.goals[5]},{'day':'Su','hours':body.goals[6]}] 
                 return this.repository.edit(accountInfo);
             }
         } catch (error) {
