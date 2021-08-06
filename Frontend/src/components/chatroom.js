@@ -1,6 +1,5 @@
 import React,{useEffect} from "react";
 import Menu from "./menu";
-import Graph from "./graph";
 import Chatbot from "./chatbot";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from '@material-ui/core/Toolbar';
@@ -18,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
 }));
-const Main = () => {
+const ChatRoom = () => {
   let history = useHistory();
   const classes = useStyles();
 
@@ -41,7 +40,6 @@ const Main = () => {
     <div className="Main" >
       <AppBar position="static">
       <Toolbar>
-
         <Menu /> 
          <Typography variant="h6" className={classes.title}>
          &emsp; SLICE
@@ -52,11 +50,15 @@ const Main = () => {
 
       
       <br/>
-      <Graph />
+      <div>  ChatRoom</div>
+   
       
       <Chatbot />
     </div>
   );
 };
 
-export default Main;
+export default ChatRoom;
+
+
+

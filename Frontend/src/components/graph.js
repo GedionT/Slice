@@ -1,6 +1,6 @@
 import React, { useState , useEffect} from "react";
 import axios from "axios";
-import {Bar , Line} from 'react-chartjs-2';
+import {Bar, Doughnut , Line} from 'react-chartjs-2';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
@@ -18,96 +18,131 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-
-
-
-
 const Graph =()=> {
   const classes = useStyles();
 
-  const [goals, setGoals] = useState(0);
-  const [daily, setDaily] = useState(0);
-  const [past, setPast] = useState(0);
+  const [lang, setLang] = useState(0);
+  const [Efficiency, setEfficiency] = useState(0);
+
+  const [langdata, setLangdata] = useState(0);
+  const [dailyread, setdailyread] = useState(0);
+  const [dailycode,setdailycode] = useState(0);
+
 
   const userid = localStorage.getItem("userid");
   useEffect(() => {
     // This gets called after every render, by default
     // (the first one, and every one after that)
     console.log('render!');
-    axios.post(`https://slice--back.herokuapp.com/api/data/front/data/get/${userid}/goal`)
-    .then(response => {setGoals(response.data.data.goals); 
-  });
-  axios.post(`https://slice--back.herokuapp.com/api/data/front/data/get/${userid}/goal`)
-  .then(response => {setDaily(response.data.data.daily_hours); 
-});
-axios.post(`https://slice--back.herokuapp.com/api/data/front/data/get/${userid}/past`)
-  .then(response => {setPast(response.data.data.last_week); 
-});
+    axios.post(`https://slice--back.herokuapp.com/api/data/front/data/get/${userid}/language`)
+    .then(response => {setLang(response.data.data.language); setLangdata(response.data.data.hours); 
+  }); 
+  axios.post(`https://slice--back.herokuapp.com/api/data/front/data/get/${userid}/efficiency`)
+  .then(response => {setEfficiency(response.data.data.effeciency);  
+}); 
+axios.post(`https://slice--back.herokuapp.com/api/data/front/data/get/${userid}/current/read`)
+.then(response => {setdailyread(response.data.data.daily_read);  
+});  axios.post(`https://slice--back.herokuapp.com/api/data/front/data/get/${userid}/current/code`)
+.then(response => {setdailycode(response.data.data.daily_hours);  
+}); 
 
   }, [userid]);
   
-
-const state = {
+  const state = {
+    labels: lang,
+    datasets: [
+      {
+        label: 'Rainfall',
+        backgroundColor: [
+          '#B21F00',
+          '#C9DE00',
+          '#2FDE00',
+          '#00A6B4',
+          '#6800B4'
+        ],
+        hoverBackgroundColor: [
+        '#501800',
+        '#4B5000',
+        '#175000',
+        '#003350',
+        '#35014F'
+        ],
+        data: langdata
+      }
+    ]
+  }
+  const data2 = {
+    labels: ['Monday', 'Tuesday', 'Wednesday',
+    'Thrusday', 'Friday','Saturday'],
+    datasets: [
+      {
+        label: "Efficiency",
+        data: Efficiency,
+        fill: true,
+        backgroundColor: "rgba(75,192,192,0.2)",
+        borderColor: "rgba(75,192,192,1)"
+      }
+     
+    ]
+  };
+  const state2 = {
     labels: ['Monday', 'Tuesday', 'Wednesday',
              'Thrusday', 'Friday','Saturday'],
     datasets: [
       {
-        label: 'Past Week',
-        backgroundColor: '#FF7600',
-        borderColor: '#FF7600',
+        label: 'Daily Code',
+        backgroundColor: '#FE9898',
+        borderColor: '#FE9898',
         borderWidth: 1,
-        data: past
+        data: dailycode
       },{
-        label: 'Current Week',
-        backgroundColor: '#28FFBF',
-        borderColor: '#28FFBF',
+        label: 'Daily Read',
+        backgroundColor: '#B980F0',
+        borderColor: '#B980F0',
         borderWidth: 1,
-        data: daily
+        data: dailyread
       },
     ]
   }
-   
-  
-const data = {
-  labels: ['Monday', 'Tuesday', 'Wednesday',
-  'Thrusday', 'Friday','Saturday'],
-  datasets: [
-    {
-      label: "Daily Hours",
-      data: daily,
-      fill: true,
-      backgroundColor: "rgba(75,192,192,0.2)",
-      borderColor: "rgba(75,192,192,1)"
-    },
-    {
-      label: "Goals",
-      data: goals,
-      fill: false,
-      borderColor: "#742774"
-    }
-  ]
-};
-
   
   return (
     <div className="Graph">
 
-<div className={classes.root}>
+<div className={classes.root}> 
   <Container>
       <Grid container spacing={3}>
         <Grid item xs={12}>
-          <Paper className={classes.paper}>24 Hour Report
-          <Line data={data} />
+          <Paper className={classes.paper}>24 Hour Report 
           </Paper>
         </Grid>
         <Grid item xs={12} sm={6}>
-          <Paper className={classes.paper}> Progress Report
-          <Bar 
+          <Paper className={classes.paper}> Language used
+          <Doughnut
           data={state}
           options={{
             title:{
               display:true,
               text:'Average Rainfall per month',
+            },
+            legend:{
+              display:true,
+              position:'right'
+            }
+          }}
+        />
+          </Paper>
+        </Grid>
+        <Grid item xs={11} sm={6}>
+        <Grid >
+          <Paper className={classes.paper}> Efficiency report
+          <Line data={data2} />
+        <br/>
+           Daily Coding Vs Daily Reading
+          <Bar data={state2}
+          options={{
+            title:{
+              display:true,
+              text:'Reading Progress  Report',
               fontSize:14},
             legend:{
               display:true,
@@ -117,24 +152,9 @@ const data = {
         />
           </Paper>
         </Grid>
-        <Grid item xs={12} sm={6}>
-          <Paper className={classes.paper}> Goals Achieved Report
-          <Line data={data} />
-          </Paper>
         </Grid>
-        {/* <Grid item xs={6} sm={3}>
-          <Paper className={classes.paper}>xs=6 sm=3</Paper>
-        </Grid>
-        <Grid item xs={6} sm={3}>
-          <Paper className={classes.paper}>xs=6 sm=3</Paper>
-        </Grid>
-        <Grid item xs={6} sm={3}>
-          <Paper className={classes.paper}>xs=6 sm=3</Paper>
-        </Grid>
-        <Grid item xs={6} sm={3}>
-          <Paper className={classes.paper}>xs=6 sm=3</Paper>
-        </Grid> */}
       </Grid>
+      
       </Container>
     </div>
     </div>
