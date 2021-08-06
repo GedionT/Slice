@@ -78,22 +78,27 @@ export default class DataService{
         throw error;
         }
     }
-    send(uid) {
+    async send(uid) {
         try {
             const accountSid = process.env.TWILIO_ACCOUNT_SID;
             const authToken = process.env.TWILIO_AUTH_TOKEN;
             const client = require('twilio')(accountSid, authToken);
-            
-            client.messages
-              .create({
-                 body: 'Welcome to Slice community! we hope to help you become a better verison of yourself',
-                 from: `+${process.env.phone}`,
-                 to: '+917762827770'
-               })
-              .then(message => console.log(message.sid)).catch(err =>
-                  console.log(err)
-              );
-            return {success:true}
+            const userInfo = await this.repository.findUserDetail(uid)
+            if(userInfo['number']){
+            // client.messages
+            //   .create({
+            //      body: 'Welcome to Slice community! we hope to help you become a better verison of yourself',
+            //      from: `+${process.env.phone}`,
+            //      to: '+917762827770'
+            //    })
+            //   .then(message => console.log(message.sid)).catch(err =>
+            //       console.log(err)
+            //   );
+            }
+            else{
+                return {"Message":"Please add your phone number"}
+            }
+            return "success"
         } catch (error) {
             console.log(error)
         }

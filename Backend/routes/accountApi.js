@@ -10,6 +10,11 @@ AccountApiRouter.post('/account/signup', (request, response) => {
   accountController.addAccount(request);
 });
 
+AccountApiRouter.post('/account/login', (request, response) => {       
+  const accountController = new AccountController(response);
+  accountController.loginAccount(request);
+});
+
 //Edit account details(Here goals only)
 AccountApiRouter.post('/account/:uid/:type', (request, response) => {
   const accountController = new AccountController(response);

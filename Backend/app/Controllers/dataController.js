@@ -43,7 +43,7 @@ export default class DataController extends Controller {
         this.handleException(error);
       })
     } catch (error) {
-        this.handleException(error)
+      console.log(error)
     }
 }
 }
