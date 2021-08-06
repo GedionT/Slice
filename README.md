@@ -38,6 +38,7 @@ Together, we can make this project **better** every day!
 
 - [Figma UI Design](https://www.figma.com/file/cul71mDT37gGNMhBuG5dtr/Untitled?node-id=0%3A1)
 - [Lucid Flow: System Design](https://lucid.app/lucidchart/c3d9fee3-0123-42c8-b444-9bda69299d81/edit?viewport_loc=-16%2C-322%2C2413%2C1101%2C0_0&shared=true)
+- [Overall Structure](https://lucid.app/lucidchart/f1801f87-51e6-4ba5-8dd9-16e108216c25/edit?page=0_0#)
 
 ## ⚠️ License
 
