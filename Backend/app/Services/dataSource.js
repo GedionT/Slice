@@ -22,6 +22,7 @@ export default class DataService{
                 var day = Date(data_recieved[item]['time']).substr(0,2);
                 if(data_recieved[item]['type']=="'open'"){
                     const langage = data_recieved[item]['lang'].substr(1,data_recieved[item]['lang'].length-2);
+                    console.log((userInfo.language[langage]),langage)
                     if(userInfo.language[langage]){
                         userInfo.language[langage] += (Number(data_recieved[item]['long'])/1000)/3600;
                     }else{
@@ -29,20 +30,20 @@ export default class DataService{
                     }
                     userInfo.current_week[DAY_TYPE[day]].reading_hours+=(Number(data_recieved[item]['long'])/1000)/3600;///adding data to the specified date reading hours
                 }else{
-                    const langage = data_recieved[item]['lang'].substr(2,data_recieved[item]['lang'].length-2);
+                    const langage = data_recieved[item]['lang'].substr(1,data_recieved[item]['lang'].length-2);
                     if(userInfo.language[langage]){
                         userInfo.language[langage] += (Number(data_recieved[item]['long'])/1000)/3600;
                     }else{
                         userInfo.language[langage] = (Number(data_recieved[item]['long'])/1000)/3600;
                     }
+                    userInfo.current_week[DAY_TYPE[day]].word_typed+=(Number(data_recieved[item]['char']));
                     userInfo.current_week[DAY_TYPE[day]].coding_hours+=(Number(data_recieved[item]['long'])/1000)/3600;///adding data to the specified date coding hours
                 }
             }
-            // const result = await this.repository.saveUserInfo(userInfo);
-            console.log(userInfo)
+            const result = await this.repository.saveUserInfo(userInfo);
+            console.log(result)
         } catch (error) {
             console.log(error);
-            throw error;
         }
     }
     async fetch(type,uid) {

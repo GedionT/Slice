@@ -7,3 +7,5 @@ export const DAY_TYPE = {
     'Sa': 5,
     'Su': 6
 }
+
+

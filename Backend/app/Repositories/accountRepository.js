@@ -49,6 +49,10 @@ export default class AccountRepository {
             {'day':'Sa','coding_hours':0,'reading_hours':0,'lines':0,'word_typed':0},
             {'day':'Su','coding_hours':0,'reading_hours':0,'lines':0,'word_typed':0}
         ]
+        obj['language'] = {
+            Javascript:0,Python:0,Golang:0,Cpp:0
+        }
+
         const userModel = new UserModel(obj)
         let userDetails;
         let token;
@@ -58,7 +62,7 @@ export default class AccountRepository {
         } catch (error) {
             return "error at adding"
         }
-        return {"success":true,"token":token};
+        return {"success":true,"token":token,userId:userDetails._id};
     }
 
 }

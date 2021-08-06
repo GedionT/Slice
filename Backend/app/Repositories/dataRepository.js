@@ -19,6 +19,7 @@ export default class DataRepository {
         try{
             return await obj.save();
         } catch (error) {
+            console.log(error)
             return "error at adding"
         }
         
