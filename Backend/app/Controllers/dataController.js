@@ -11,7 +11,7 @@ export default class DataController extends Controller {
     create (request) {
         try{
             
-          this.service.create(request.file,request.params.uid)
+          this.service.create(request.file,request.params)
           this.sendResponse(request.test)
         } catch (error) {
             this.handleException(error)
@@ -32,4 +32,18 @@ export default class DataController extends Controller {
           this.handleException(error)
       }
   }
+  send (request) {
+    try{
+      const uid =  request.params.uid;
+
+      const promise = this.service.send(uid);
+      promise.then(res=>{
+        this.sendResponse(res);
+      }).catch(error =>{
+        this.handleException(error);
+      })
+    } catch (error) {
+        this.handleException(error)
+    }
+}
 }

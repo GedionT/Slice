@@ -4,6 +4,7 @@ import {DAY_TYPE,MONDAY} from '../Constants/constants';
 const fs=require('fs');
 const { promisify } = require('util')
 const unlinkAsync = promisify(fs.unlink)
+require("dotenv").config();
 
 export default class DataService{
     constructor() {
@@ -75,6 +76,26 @@ export default class DataService{
             }
         } catch (error) {
         throw error;
+        }
+    }
+    send(uid) {
+        try {
+            const accountSid = process.env.TWILIO_ACCOUNT_SID;
+            const authToken = process.env.TWILIO_AUTH_TOKEN;
+            const client = require('twilio')(accountSid, authToken);
+            
+            client.messages
+              .create({
+                 body: 'Welcome to Slice community! we hope to help you become a better verison of yourself',
+                 from: `+${process.env.phone}`,
+                 to: '+917762827770'
+               })
+              .then(message => console.log(message.sid)).catch(err =>
+                  console.log(err)
+              );
+            return {success:true}
+        } catch (error) {
+            console.log(error)
         }
     }
 }

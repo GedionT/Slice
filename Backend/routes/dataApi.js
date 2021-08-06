@@ -17,4 +17,9 @@ DataApiRouter.post('/front/data/get/:uid/:type', (request, response) => {
     dataController.fetch(request);
 });
 
+DataApiRouter.post('/front/data/reply/:uid/send', (request, response) => {
+  const dataController = new DataController(response);
+  dataController.send(request);
+});
+
 export default DataApiRouter;
