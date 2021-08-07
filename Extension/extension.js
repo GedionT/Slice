@@ -198,16 +198,16 @@ async function updateConfigurations(username, password) {
     .catch((error) => console.log(error));
 
   // // Slice Config
-  const userToken = userTkn;
-  const uploadURL = `https://slice--back.herokuapp.com/api/data/exten/data/send/${userId}`;
+  userToken = userTkn;
+  uploadURL = `https://slice--back.herokuapp.com/api/data/exten/data/send/${userId}`;
   // fixed wrong more thinking time configuration value
-  uploader.set(uploadURL, userToken);
-  uploadObject.init(`${username}-${require("os").platform()}`);
 }
 
 let username,
   password,
   userId,
+  userToken,
+  uploadURL,
   userTkn,
   stat = "Error";
 
@@ -235,7 +235,9 @@ async function activate(context) {
   let subscriptions = context.subscriptions;
 
   // initialize the uploadObject and uploader
-  uploadObject.init();
+  uploadObject.init(`${username}-${require("os").platform()}`);
+  
+  uploader.set(uploadURL, userToken);
 
   // tracking the file display when vscode open
   EventHandler.onActiveFileChange(
