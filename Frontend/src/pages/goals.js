@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
-import Menu from "./menu";
-import Chatbot from "./chatbot";
+import Menu from "../components/menu";
+import Chatbot from "../components/chatbot";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
-import Slider from '@material-ui/core/Slider'
+import Slider from "@material-ui/core/Slider";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
-//usehistory to redirect
+//use-history to redirect
 import { useHistory } from "react-router-dom";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
@@ -45,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    width:300
+    width: 300,
   },
 }));
 const Goals = () => {
@@ -166,44 +166,48 @@ const Goals = () => {
   const marks = [
     {
       value: 0,
-      label: '0',
+      label: "0",
     },
     {
       value: 5,
-      label: '5',
-    }, {
+      label: "5",
+    },
+    {
       value: 10,
-      label: '10',
+      label: "10",
     },
     {
       value: 15,
-      label: '15',
+      label: "15",
     },
     {
       value: 24,
-      label: '24',
-    }
+      label: "24",
+    },
   ];
-  
-  
-  const valuetext =(value)=> {
+
+  const valuetext = (value) => {
     return `${value}`;
-  }
+  };
 
   //set goals function
-  const setgoals =()=>{
-    const goals = {"goals": [mo,tu ,wed ,th,fr,sa,0]}
+  const setgoals = () => {
+    const goals = { goals: [mo, tu, wed, th, fr, sa, 0] };
     console.log(goals);
-axios.post(`https://slice--back.herokuapp.com/api/users/account/${userid}/edit`, goals)
-  .then(response => {});
-  axios
-  .post(
-    `https://slice--back.herokuapp.com/api/data/front/data/get/${userid}/goal/code`
-  )
-  .then((response) => {
-    setGoals(response.data.data.goals);
-  });
-  }
+    axios
+      .post(
+        `https://slice--back.herokuapp.com/api/users/account/${userid}/edit`,
+        goals
+      )
+      .then((response) => {});
+    axios
+      .post(
+        `https://slice--back.herokuapp.com/api/data/front/data/get/${userid}/goal/code`
+      )
+      .then((response) => {
+        setGoals(response.data.data.goals);
+      });
+  };
   return (
     <div className="Main">
       <AppBar position="static">
@@ -246,92 +250,95 @@ axios.post(`https://slice--back.herokuapp.com/api/users/account/${userid}/edit`,
               <Paper className={classes.paper2}>
                 {" "}
                 <TrackChangesIcon /> Edit Goals
-                <div className={classes.paper3}><Typography id="discrete-slider-custom" gutterBottom>
-                  Monday
-                </Typography>
-                <Slider
-                  defaultValue={1}
-                  getAriaValueText={valuetext}
-                  aria-labelledby="discrete-slider-custom"
-                  step={1}
-                  max={24}
-                  valueLabelDisplay="auto"
-                  marks={marks}
-                  onChange={(e , value) => setmo(value)}      
-                            />
-                <Typography id="discrete-slider-custom" gutterBottom>
-                  Tuesday
-                </Typography>
-                <Slider
-                  defaultValue={1}
-                  getAriaValueText={valuetext}
-                  aria-labelledby="discrete-slider-custom"
-                  step={1}
-                  max={24}
-                  valueLabelDisplay="auto"
-                  marks={marks}
-                  onChange={(e , value) => settu(value)}
-                />
-                <Typography id="discrete-slider-custom" gutterBottom>
-                  Wednesday
-                </Typography>
-                <Slider
-                  defaultValue={1}
-                  getAriaValueText={valuetext}
-                  aria-labelledby="discrete-slider-custom"
-                  step={1}
-                  max={24}
-                  valueLabelDisplay="auto"
-                  marks={marks}
-                  onChange={(e , value) => setwed(value)}
-                />
-                <Typography id="discrete-slider-custom" gutterBottom>
-                  Thursday
-                </Typography>
-                <Slider
-                  defaultValue={1}
-                  getAriaValueText={valuetext}
-                  aria-labelledby="discrete-slider-custom"
-                  step={1}
-                  max={24}
-                  valueLabelDisplay="auto"
-                  marks={marks}
-                  onChange={(e , value) => setth(value)}
-                />
-                <Typography id="discrete-slider-custom" gutterBottom>
-                  Friday
-                </Typography>
-                <Slider
-                  defaultValue={1}
-                  getAriaValueText={valuetext}
-                  aria-labelledby="discrete-slider-custom"
-                  step={1}
-                  max={24}
-                  valueLabelDisplay="auto"
-                  marks={marks}
-                  onChange={(e , value) => setfr(value)}
-                />
-                <Typography id="discrete-slider-custom" gutterBottom>
-                  Saturday
-                </Typography>
-                <Slider
-                  defaultValue={1}
-                  getAriaValueText={valuetext}
-                  aria-labelledby="discrete-slider-custom"
-                  step={1}
-                  max={24}
-                  valueLabelDisplay="auto"
-                  marks={marks}
-                  onChange={(e , value) => setsa(value)}
-                />
-                <br/>
-                <Button
-                  fullWidth
-                  variant="contained"
-                  color="success"
-                  className={classes.submit}
-                  onClick={setgoals}
-                >Set Goals!</Button>
+                <div className={classes.paper3}>
+                  <Typography id="discrete-slider-custom" gutterBottom>
+                    Monday
+                  </Typography>
+                  <Slider
+                    defaultValue={1}
+                    getAriaValueText={valuetext}
+                    aria-labelledby="discrete-slider-custom"
+                    step={1}
+                    max={24}
+                    valueLabelDisplay="auto"
+                    marks={marks}
+                    onChange={(e, value) => setmo(value)}
+                  />
+                  <Typography id="discrete-slider-custom" gutterBottom>
+                    Tuesday
+                  </Typography>
+                  <Slider
+                    defaultValue={1}
+                    getAriaValueText={valuetext}
+                    aria-labelledby="discrete-slider-custom"
+                    step={1}
+                    max={24}
+                    valueLabelDisplay="auto"
+                    marks={marks}
+                    onChange={(e, value) => settu(value)}
+                  />
+                  <Typography id="discrete-slider-custom" gutterBottom>
+                    Wednesday
+                  </Typography>
+                  <Slider
+                    defaultValue={1}
+                    getAriaValueText={valuetext}
+                    aria-labelledby="discrete-slider-custom"
+                    step={1}
+                    max={24}
+                    valueLabelDisplay="auto"
+                    marks={marks}
+                    onChange={(e, value) => setwed(value)}
+                  />
+                  <Typography id="discrete-slider-custom" gutterBottom>
+                    Thursday
+                  </Typography>
+                  <Slider
+                    defaultValue={1}
+                    getAriaValueText={valuetext}
+                    aria-labelledby="discrete-slider-custom"
+                    step={1}
+                    max={24}
+                    valueLabelDisplay="auto"
+                    marks={marks}
+                    onChange={(e, value) => setth(value)}
+                  />
+                  <Typography id="discrete-slider-custom" gutterBottom>
+                    Friday
+                  </Typography>
+                  <Slider
+                    defaultValue={1}
+                    getAriaValueText={valuetext}
+                    aria-labelledby="discrete-slider-custom"
+                    step={1}
+                    max={24}
+                    valueLabelDisplay="auto"
+                    marks={marks}
+                    onChange={(e, value) => setfr(value)}
+                  />
+                  <Typography id="discrete-slider-custom" gutterBottom>
+                    Saturday
+                  </Typography>
+                  <Slider
+                    defaultValue={1}
+                    getAriaValueText={valuetext}
+                    aria-labelledby="discrete-slider-custom"
+                    step={1}
+                    max={24}
+                    valueLabelDisplay="auto"
+                    marks={marks}
+                    onChange={(e, value) => setsa(value)}
+                  />
+                  <br />
+                  <Button
+                    fullWidth
+                    variant="contained"
+                    color="success"
+                    className={classes.submit}
+                    onClick={setgoals}
+                  >
+                    Set Goals!
+                  </Button>
                 </div>
               </Paper>
             </Grid>
