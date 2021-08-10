@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Menu from "./menu";
-import Chatbot from "./chatbot";
+import Menu from "../components/menu";
+import Chatbot from "../components/chatbot";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
@@ -17,12 +17,12 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Avatar from "@material-ui/core/Avatar";
-import FaceIcon from '@material-ui/icons/Face';
-import PhoneAndroidIcon from '@material-ui/icons/PhoneAndroid';
-import EmailIcon from '@material-ui/icons/Email';
-import GitHubIcon from '@material-ui/icons/GitHub';
+import FaceIcon from "@material-ui/icons/Face";
+import PhoneAndroidIcon from "@material-ui/icons/PhoneAndroid";
+import EmailIcon from "@material-ui/icons/Email";
+import GitHubIcon from "@material-ui/icons/GitHub";
 import Divider from "@material-ui/core/Divider";
-import signupgif from '../assets/signup.png'
+import signupgif from "../assets/signup.png";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -44,14 +44,14 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     alignItems: "center",
   },
-   image2: {
+  image2: {
     backgroundImage: `url(${signupgif})`,
     backgroundRepeat: "no-repeat",
     backgroundColor:
       theme.palette.type === "light"
         ? theme.palette.grey[50]
         : theme.palette.grey[900],
-    backgroundSize:"100% 100%",
+    backgroundSize: "100% 100%",
     backgroundPosition: "center",
     height: "100vh",
   },
@@ -85,7 +85,6 @@ const Profile = () => {
         setEmail(response.data.data.email);
         setGitHub(response.data.data.githubUsername);
         setNumber(response.data.data.number);
-
       });
   }, [userid]);
 
@@ -95,13 +94,15 @@ const Profile = () => {
     localStorage.removeItem("token");
     history.push("/");
   };
-const sendNotification = ()=>{
-  axios
+  const sendNotification = () => {
+    axios
       .post(
         `https://slice--back.herokuapp.com/api/data/front/data/reply/${userid}/send`
       )
-      .then((response) => {console.log("Notification sent !")});
-}
+      .then((response) => {
+        console.log("Notification sent !");
+      });
+  };
   return (
     <div className="Main" className={classes.image2}>
       <AppBar position="static">
@@ -120,16 +121,17 @@ const sendNotification = ()=>{
       <div>
         {" "}
         <Container>
-          <Grid container spacing={3} >
-            <Grid item xs={12}  > 
-              <Paper className={classes.paper} >
+          <Grid container spacing={3}>
+            <Grid item xs={12}>
+              <Paper className={classes.paper}>
                 <img
                   src={`https://eu.ui-avatars.com/api?name=${localStorage.getItem(
                     "github"
                   )}&&size=80&background=random&rounded=true`}
+                  alt="GitHub Avatar"
                 />
 
-                <List className={classes.list} >
+                <List className={classes.list}>
                   <ListItem>
                     <ListItemAvatar>
                       <Avatar>
@@ -168,25 +170,25 @@ const sendNotification = ()=>{
                     </ListItemAvatar>
                     <ListItemText
                       primary="Mobile"
-                      secondary={Number||"Not Provided"}
+                      secondary={Number || "Not Provided"}
                     />
                   </ListItem>
                 </List>
                 <Button
-                  
                   variant="contained"
                   color="primary"
                   className={classes.submit}
                   onClick={sendNotification}
-                >Send Notification !</Button>
+                >
+                  Send Notification !
+                </Button>
               </Paper>
             </Grid>
           </Grid>
         </Container>
-      
       </div>
-   
-                      <Chatbot />
+
+      <Chatbot />
     </div>
   );
 };
