@@ -81,10 +81,10 @@ const Menu = () => {
                         <ListItemIcon><AssessmentIcon /></ListItemIcon>
                         <ListItemText primary="Progess Report" />
                     </ListItem>
-                    {/* <ListItem button key="Chat Rooms" onClick={()=>{history.push("/chat");}}>
+                    <ListItem button key="Chat Rooms" onClick={()=>{history.push("/chat");}}>
                         <ListItemIcon><ChatIcon /></ListItemIcon>
                         <ListItemText primary="Chat Rooms" />
-                    </ListItem> */}
+                    </ListItem>
             </List>
             <Divider />
             <List>
