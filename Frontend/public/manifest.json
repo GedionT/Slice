@@ -1,0 +1,32 @@
+{
+    "short_name": "Slice",
+    "name": "Developer Habit Tracker in VS Code",
+    "description": "Understand your daily coding habit and find areas of improvement",
+    "icons": [
+      {
+        "src": "favicon.ico",
+        "sizes": "64x64 32x32 24x24 16x16",
+        "type": "image/x-icon"
+      },
+      {
+        "src": "slice.png",
+        "type": "image/png",
+        "sizes": "192x192"
+      },
+      {
+        "src": "slice.png",
+        "type": "image/png",
+        "sizes": "512x512"
+      },
+      {
+        "src": "maskable_icon.png",
+        "type": "image/png",
+        "sizes": "256x256",
+        "purpose": "any maskable"
+      }
+    ],
+    "start_url": ".",
+    "display": "standalone",
+    "theme_color": "#000000",
+    "background_color": "#ffffff"
+  }
