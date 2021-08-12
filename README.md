@@ -9,7 +9,10 @@ A developer habit tracker VS Code extension.
 <p align="center">A VS Code extension to <b>track</b>, <b>understand</b> <br/>and <b>improve</b> your development experience by directly understanding your development habits.<br/><br/>Focus on <b>writing</b> code and <b>building</b> products while <em>Slice</em> break down your habits and recommend efficient habits</p>
 
 
-[![CodeQL](https://github.com/GedionT/Slice/actions/workflows/codeql-analysis.yml/badge.svg?branch=master)](https://github.com/GedionT/Slice/actions/workflows/codeql-analysis.yml)
+[![CodeQL](https://github.com/GedionT/Slice/actions/workflows/codeql-analysis.yml/badge.svg?branch=master)](https://github.com/GedionT/Slice/actions/workflows/codeql-analysis.yml) 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/f050968e-d9bd-4f9e-9a15-f7f513129c0a/deploy-status)](https://app.netlify.com/sites/suspicious-shannon-ba26b1/deploys)
+
+
 
 ## Quick start
 
