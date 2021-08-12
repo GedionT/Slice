@@ -1,6 +1,6 @@
 import React, { useState , useEffect} from "react";
-import Menu from "./menu";
-import Chatbot from "./chatbot";
+import Menu from "../components/menu";
+import Chatbot from "../components/chatbot";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';

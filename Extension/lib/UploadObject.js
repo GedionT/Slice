@@ -21,8 +21,8 @@ let baseUploadObject = {
 
   line: 0,
   char: 0,
-  r1: "1",
-  r2: "",
+  // r1: "1",
+  // r2: "",
 };
 
 module.exports = { init, generateOpen, generateCode };
@@ -33,7 +33,8 @@ module.exports = { init, generateOpen, generateCode };
  */
 function init(computerId) {
   // workspaceFolder[0] alternative
-  lastActiveProject = vscode.workspace.rootPath || UNKNOWN;
+  lastActiveProject =
+    vscode.workspace.workspaceFolders[0].toString() || UNKNOWN;
   baseUploadObject.pcid = computerId;
 }
 function generateOpen(activeDocument, time, long) {
@@ -61,7 +62,8 @@ function generate(type, activeDocument, time, long) {
   //   result of parameter is false: src/hello.js
   //   new parameter since VSCode 1.18.0:
   //   https://code.visualstudio.com/docs/extensionAPI/vscode-api#workspace.asRelativePath
-  obj.file = uri.scheme;
+  // obj.file = uri.scheme;
+  obj.file = fileName;
   obj.lang = activeDocument.languageId;
   switch (uri.scheme) {
     case "file":
@@ -79,7 +81,7 @@ function generate(type, activeDocument, time, long) {
   obj.time = time;
   obj.long = long;
   obj.line = activeDocument.lineCount;
-  obj.char = 0; //TODO: getText().length: But it affect extension efficiency
+  obj.char = activeDocument.getText().length; // it affect extension efficiency
 
   console.log(obj);
   return obj;

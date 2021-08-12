@@ -22,9 +22,9 @@ const useStyles = makeStyles((theme) => ({
 const ChatRoom = () => {
   let history = useHistory();
   const classes = useStyles();
-  const PERSON_IMG = "https://image.flaticon.com/icons/svg/145/145867.svg";
   const userid =  localStorage.getItem("userid");
   const githubUsername = localStorage.getItem("github");
+  const PERSON_IMG = `https://eu.ui-avatars.com/api?name=${githubUsername}&&size=80&background=random&rounded=true`;
 
   //checking jwt tokens
   useEffect(() => {
