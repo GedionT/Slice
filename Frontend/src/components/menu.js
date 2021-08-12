@@ -15,7 +15,7 @@ import AssessmentIcon from "@material-ui/icons/Assessment";
 import GitHubIcon from "@material-ui/icons/GitHub";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
-// import ChatIcon from '@material-ui/icons/Chat';
+import ChatIcon from '@material-ui/icons/Chat';
 
 import { grey } from "@material-ui/core/colors";
 import MenuIcon from "@material-ui/icons/Menu";
@@ -67,84 +67,43 @@ const Menu = () => {
       role="presentation"
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
-    >
-      <List>
-        <ListItem
-          button
-          key="Home"
-          onClick={() => {
-            history.push("/home");
-          }}
-        >
-          <ListItemIcon>
-            <HomeIcon />
-          </ListItemIcon>
-          <ListItemText primary="Home" />
-        </ListItem>
-        <ListItem
-          button
-          key="Weekly Goals"
-          onClick={() => {
-            history.push("/goals");
-          }}
-        >
-          <ListItemIcon>
-            <TrackChangesIcon />
-          </ListItemIcon>
-          <ListItemText primary="Weekly Goals" />
-        </ListItem>
-        <ListItem
-          button
-          key="Progess Report"
-          onClick={() => {
-            history.push("/progress");
-          }}
-        >
-          <ListItemIcon>
-            <AssessmentIcon />
-          </ListItemIcon>
-          <ListItemText primary="Progess Report" />
-        </ListItem>
-        {/* <ListItem button key="Chat Rooms" onClick={()=>{history.push("/chat");}}>
+    >   
+            <List>
+                
+                    <ListItem button key="Home" onClick={()=>{history.push("/home");}}>
+                        <ListItemIcon><HomeIcon /></ListItemIcon>
+                        <ListItemText primary="Home" />
+                    </ListItem>
+                    <ListItem button key="Weekly Goals" onClick={()=>{history.push("/goals");}}>
+                        <ListItemIcon><TrackChangesIcon /></ListItemIcon>
+                        <ListItemText primary="Weekly Goals" />
+                    </ListItem>
+                    <ListItem button key="Progess Report" onClick={()=>{history.push("/progress");}}>
+                        <ListItemIcon><AssessmentIcon /></ListItemIcon>
+                        <ListItemText primary="Progess Report" />
+                    </ListItem>
+                    <ListItem button key="Chat Rooms" onClick={()=>{history.push("/chat");}}>
                         <ListItemIcon><ChatIcon /></ListItemIcon>
                         <ListItemText primary="Chat Rooms" />
-                    </ListItem> */}
-      </List>
-      <Divider />
-      <List>
-        <ListItem
-          button
-          key="GitHub Report"
-          onClick={() => {
-            history.push("/github");
-          }}
-        >
-          <ListItemIcon>
-            <GitHubIcon />
-          </ListItemIcon>
-          <ListItemText primary="GitHub Report" />
-        </ListItem>
-        <ListItem
-          button
-          key="User Profile"
-          onClick={() => {
-            history.push("/profile");
-          }}
-        >
-          <ListItemIcon>
-            <AccountCircleIcon />
-          </ListItemIcon>
-          <ListItemText primary="User Profile" />
-        </ListItem>
-        <ListItem button key="Logout" onClick={logout}>
-          <ListItemIcon>
-            <ExitToAppIcon />
-          </ListItemIcon>
-          <ListItemText primary="Logout" />
-        </ListItem>
-      </List>
-    </div>
-  );
+                    </ListItem>
+            </List>
+            <Divider />
+            <List>
+                    <ListItem button key="GitHub Report" onClick={()=>{history.push("/github");}}>
+                        <ListItemIcon><GitHubIcon /></ListItemIcon>
+                        <ListItemText primary="GitHub Report" />
+                    </ListItem>
+                    <ListItem button key="User Profile" onClick={()=>{history.push("/profile");}}>
+                        <ListItemIcon><AccountCircleIcon /></ListItemIcon>
+                        <ListItemText primary="User Profile" />
+                    </ListItem>
+                    <ListItem button key="Logout" onClick={logout}>
+                        <ListItemIcon>< ExitToAppIcon /></ListItemIcon>
+                        <ListItemText primary="Logout" />
+                    </ListItem>
+            </List>
+        </div>
+    );
 
   return (
     <div className="Menu">

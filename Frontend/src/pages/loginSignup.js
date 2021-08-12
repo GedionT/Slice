@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useDebugValue, useState } from "react";
 import axios from "axios";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
@@ -22,8 +22,8 @@ function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {"Copyright © "}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
+      <Link color="inherit" href="https://github.com/GedionT/Slice">
+       Slice
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}
@@ -81,7 +81,7 @@ const Login = () => {
   const classes = useStyles();
   const [showing, setShowing] = useState(true);
   const [success, setSuccess] = useState(false);
-  const loginSubmit = ()=> {
+  const loginSubmit = async ()=> {
 
     if(document.getElementById("github") && document.getElementById("password"))
     {
@@ -89,21 +89,20 @@ const Login = () => {
       "githubUsername": document.getElementById("github").value ,
       "password": document.getElementById("password").value
   };
-  localStorage.setItem("github", document.getElementById("github").value);
-  axios.post('https://slice--back.herokuapp.com/api/users/account/login/', logindata)
-            .then(response => {setSuccess(response.data.data.success ); 
-              if(success)
+  // localStorage.setItem("github", document.getElementById("github").value);
+  await axios.post('https://slice--back.herokuapp.com/api/users/account/login/', logindata)
+            .then(response => { 
+              setSuccess(response.data.data.success); 
+              if(response.data.data.success)
                { localStorage.setItem("userid",response.data.data.userid );
                 localStorage.setItem("token", response.data.data.token);
+                history.push("/home");
+
                }
           });
-  }
-
-  if(success)
-  {
-    history.push("/home");
 
   }
+
   }
   
   const signupSubmit = ()=> {
