@@ -89,7 +89,7 @@ const Login = () => {
       "githubUsername": document.getElementById("github").value ,
       "password": document.getElementById("password").value
   };
-  // localStorage.setItem("github", document.getElementById("github").value);
+  localStorage.setItem("github", document.getElementById("github").value);
   await axios.post('https://slice--back.herokuapp.com/api/users/account/login/', logindata)
             .then(response => { 
               setSuccess(response.data.data.success); 

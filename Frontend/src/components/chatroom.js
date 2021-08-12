@@ -10,7 +10,11 @@ import { makeStyles } from '@material-ui/core/styles';
 import { useHistory } from 'react-router-dom';
 import { Input } from "@material-ui/core";
 import SendIcon from '@material-ui/icons/Send';
-import './chatroom.css'
+import './chatroom.css';
+
+//socket.io for chatbackend
+import {io} from "socket.io-client";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -19,12 +23,60 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
 }));
+
+
+const userid =  localStorage.getItem("userid");
+const githubUsername = localStorage.getItem("github");
+const PERSON_IMG = `https://eu.ui-avatars.com/api?name=${githubUsername}&&size=80&background=random&rounded=true`;
+const socket = io('https://slicechat.herokuapp.com/' , { transports : ['websocket'] });
+ socket.emit('join-room', 'hargun', userid , githubUsername);
+ socket.on('user-connected',(user_id)=>{
+   console.log(user_id + "is connected");
+ })
+
+ 
+ socket.on('createMessage', (msg , userName , givenId) => {
+
+  if(givenId === userid)
+   { console.log("hi");
+     appendMessage(userName, PERSON_IMG, "right", msg);}
+  else
+  appendMessage(userName, PERSON_IMG, "left", msg);
+
+});
+
+const appendMessage = (name, img, side, text) => {  
+
+  const messageBox =  document.getElementById("messageBox");
+   const msgHTML = `
+     <div class="msg ${side}-msg">
+       <div class="msg-img" style="background-image: url(${img})"></div>
+       <div class="msg-bubble">
+         <div class="msg-info">
+           <div class="msg-info-name">${name}</div>
+           <div class="msg-info-time">${formatDate(new Date())}</div>
+         </div>
+         <div class="msg-text">${text}</div>
+       </div>
+     </div>
+   `;
+ 
+   messageBox.insertAdjacentHTML("beforeend", msgHTML);
+   messageBox.scrollTop += 500;
+ }
+
+
+ const formatDate = (date) => {
+  const h = "0" + date.getHours();
+  const m = "0" + date.getMinutes();
+
+  return `${h.slice(-2)}:${m.slice(-2)}`;
+} 
+
 const ChatRoom = () => {
   let history = useHistory();
   const classes = useStyles();
-  const userid =  localStorage.getItem("userid");
-  const githubUsername = localStorage.getItem("github");
-  const PERSON_IMG = `https://eu.ui-avatars.com/api?name=${githubUsername}&&size=80&background=random&rounded=true`;
+
 
   //checking jwt tokens
   useEffect(() => {
@@ -45,11 +97,12 @@ const ChatRoom = () => {
      var msg = msgInput .value;
    if(msg!="")
    {
-    appendMessage(githubUsername, PERSON_IMG,"left", msg);
+    socket.emit('message', msg);
     msgInput.value="";
   }
    
  }
+
  
  document.addEventListener('keypress', (e) => {
   if (e.keyCode === 13) {
@@ -58,31 +111,6 @@ const ChatRoom = () => {
    }
  });
 
- const appendMessage = (name, img, side, text) => {  
- const messageBox =  document.getElementById("messageBox");
-  const msgHTML = `
-    <div class="msg ${side}-msg">
-      <div class="msg-img" style="background-image: url(${img})"></div>
-      <div class="msg-bubble">
-        <div class="msg-info">
-          <div class="msg-info-name">${name}</div>
-          <div class="msg-info-time">${formatDate(new Date())}</div>
-        </div>
-        <div class="msg-text">${text}</div>
-      </div>
-    </div>
-  `;
-
-  messageBox.insertAdjacentHTML("beforeend", msgHTML);
-  messageBox.scrollTop += 500;
-}
-
-const formatDate = (date) => {
-  const h = "0" + date.getHours();
-  const m = "0" + date.getMinutes();
-
-  return `${h.slice(-2)}:${m.slice(-2)}`;
-}
 
   return (
     <div className="Main" >
