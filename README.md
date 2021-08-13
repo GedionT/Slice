@@ -73,3 +73,15 @@ Together, we can make this project **better** every day!
 ![image](https://user-images.githubusercontent.com/60891544/128580469-8ded6466-d82a-4e5a-aefc-d7e254f7eab5.png)
 
 ![image](https://user-images.githubusercontent.com/60891544/128580487-2c97bc91-daa2-4b85-b14c-a03d8d4d73bd.png)
+
+
+
+Upon signing in the user gets a message like this(give the user had signed up with phone number(including the country code, for ex +91......(code for **India**)):-
+
+![WhatsApp Image 2021-08-07 at 2 41 56 AM (1)](https://user-images.githubusercontent.com/60891544/128572254-f14ab259-60df-43f7-8789-5611438b6151.jpeg)
+
+TO get daily report a button on frontend is pushed and user gets the following:-
+
+
+![WhatsApp Image 2021-08-07 at 2 41 56 AM](https://user-images.githubusercontent.com/60891544/128572261-63f580ee-bfaf-47d7-b6ce-b015318c8c26.jpeg)
+
