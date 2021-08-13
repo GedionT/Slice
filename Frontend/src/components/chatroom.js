@@ -102,33 +102,32 @@ if (!firebase.apps.length) {
 }else {
   firebase.app(); // if already initialized, use that one
 }
- let messageset = 1;
 
- if(messageset){
- firebase.database().ref('/').on('value', (snapshot) => {
-
-if(messageset){snapshot.forEach(element => {
- 
-    if (element.val().userid === userid) {
-      appendMessage2(element.val().githubUsername, PERSON_IMG, "right", element.val().msg,element.val().time);
-    }
-    else
-      appendMessage2(element.val().githubUsername, `https://eu.ui-avatars.com/api?name=${element.val().githubUsername}&&size=80&background=random&rounded=true`, "left",element.val().msg,element.val().time);
-
-   });
-  }
-  messageset=0;
-});
- 
- }
 
 
   const ChatRoom = () => {  
   let history = useHistory();
   const classes = useStyles();
+  var messageset = 1;
+ useEffect(()=>{
+ if(messageset){
+  firebase.database().ref('/').on('value', (snapshot) => {
+ 
+ if(messageset){snapshot.forEach(element => {
   
-
-
+     if (element.val().userid === userid) {
+       appendMessage2(element.val().githubUsername, PERSON_IMG, "right", element.val().msg,element.val().time);
+     }
+     else
+       appendMessage2(element.val().githubUsername, `https://eu.ui-avatars.com/api?name=${element.val().githubUsername}&&size=80&background=random&rounded=true`, "left",element.val().msg,element.val().time);
+ 
+    });
+   }
+   messageset=0;
+ });
+  
+  }
+ })
 
 
 
