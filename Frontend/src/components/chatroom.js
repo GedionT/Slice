@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import Menu from "./menu";
 import Chatbot from "./chatbot";
-import PropTypes from 'prop-types';
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -9,7 +8,7 @@ import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 //usehistory to redirect
 import { useHistory } from 'react-router-dom';
-import { Input } from "@material-ui/core";
+import {  TextField } from "@material-ui/core";
 import SendIcon from '@material-ui/icons/Send';
 import './chatroom.css';
 //socket.io for chatbackend
@@ -24,6 +23,8 @@ const socket = io('https://slicechat.herokuapp.com/', { transports: ['websocket'
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+    backgroundColor: theme.palette.text.primary,
+    height:"90.57vh"
   },
   title: {
     flexGrow: 1,
@@ -156,7 +157,7 @@ if (!firebase.apps.length) {
       socket.emit('message', msg);
       var time = formatDate(new Date());
       const msgobj ={
-        time, msg,githubUsername,userid 
+        time, msg , githubUsername,userid 
       }
       firebase.database().ref("/").push(msgobj);
 
@@ -190,17 +191,22 @@ if (!firebase.apps.length) {
           <Button color="inherit" onClick={logout}>Logout</Button>
         </Toolbar>
       </AppBar>
-
+      <div className={classes.root}> 
       <div className="msger" >
-        <div className="main__header">Doubt Discussion</div>
+        <div className="msgerheader">Doubt Discussion</div>
+        <div class="main__chat__window" id="main__chat__window">
         <div id="messageBox" className="msger-chat"></div>
-        <div  className="msg_in"><Input placeholder="Type Here ..." inputProps={{ 'aria-label': 'description' }}  id="msgInput" defaultValue="" /> <Button variant="outlined" size="small" color="primary" onClick={sendMessage}> <SendIcon /></Button>
+        </div>
+        <div  className="msg_in main__message_container input-group">
+          <input type="text" id="msgInput" class="bg-white-20 form-control msger-input" defaultValue=""
+              placeholder="Type message here.." aria-label="Recipient's username with two button addons"/>
+                      <Button variant="outlined" size="small" color="primary" onClick={sendMessage}> <SendIcon /></Button>
+
         </div>
         </div>
-
-
 
       <Chatbot />
+      </div>
     </div>
   );
 };

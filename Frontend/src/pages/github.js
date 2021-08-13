@@ -15,6 +15,9 @@ import Grid from "@material-ui/core/Grid";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+    padding: theme.spacing(2),
+    backgroundColor: theme.palette.text.primary
+    
   },
   title: {
     flexGrow: 1,
@@ -57,8 +60,7 @@ const GitHubReport = () => {
         </Toolbar>
       </AppBar>
 
-      <br />
-
+      <div className={classes.root}>
       <Container>
         <Grid container spacing={3}>
           <Grid item xs={12} sm={12}>
@@ -93,6 +95,7 @@ const GitHubReport = () => {
           </Grid>
         </Grid>
       </Container>
+      </div>
       <Chatbot />
     </div>
   );

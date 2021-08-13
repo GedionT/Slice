@@ -18,6 +18,9 @@ import AssessmentIcon from '@material-ui/icons/Assessment';
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+    padding: theme.spacing(2),
+    backgroundColor: theme.palette.text.primary,
+    height:"86.6vh"
   },
   title: {
     flexGrow: 1,
@@ -136,9 +139,6 @@ const state = {
     <Button color="inherit" onClick={logout}>Logout</Button>
         </Toolbar>
       </AppBar>
-
-      
-      <br/>
       <div className={classes.root}>
   <Container>
       <Grid container spacing={3}>
@@ -179,13 +179,10 @@ const state = {
           }}
         />
           </Paper>
-        </Grid>
-       
+        </Grid>  
       </Grid>
       </Container>
-    </div>
-   
-      
+      </div>
       <Chatbot />
     </div>
   );

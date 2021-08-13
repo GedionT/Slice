@@ -5,16 +5,24 @@ import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import { Container } from "@material-ui/core";
-
+import AssessmentIcon from "@material-ui/icons/Assessment";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+    padding: theme.spacing(2),
+    backgroundColor: theme.palette.text.primary
   },
   paper: {
     padding: theme.spacing(2),
     textAlign: 'center',
     color: theme.palette.text.secondary,
   },
+  paper2: {
+    padding: theme.spacing(2),
+    textAlign: 'center',
+    color: theme.palette.text.primary,
+    fontSize:"20px"
+  }
 }));
 
 
@@ -112,7 +120,7 @@ axios.post(`https://slice--back.herokuapp.com/api/data/front/data/get/${userid}/
   <Container>
       <Grid container spacing={3}>
         <Grid item xs={12}>
-          <Paper className={classes.paper}>24 Hour Report 
+          <Paper className={classes.paper2}> <AssessmentIcon/> 24 Hour Report 
           </Paper>
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -122,7 +130,7 @@ axios.post(`https://slice--back.herokuapp.com/api/data/front/data/get/${userid}/
           options={{
             title:{
               display:true,
-              text:'Average Rainfall per month',
+              text:'Languages used',
             },
             legend:{
               display:true,
