@@ -1,3 +1,13 @@
+## Slice Frontend
+- Is a dashboard web app that is directly linked in the back to your activity in VScode
+- It is installable and a Progressive Web App you can use offline from your desktop, mobile, or other device.
+
+
+## Lighthouse score on 8/12/2021
+
+![slice lighthouse](https://user-images.githubusercontent.com/26666155/129307386-75040ba9-d9a4-483f-95a1-342c029f26df.png)
+
+
 ## Few Images of Frontend
 
 
