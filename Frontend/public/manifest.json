@@ -9,20 +9,20 @@
         "type": "image/x-icon"
       },
       {
-        "src": "slice.png",
+        "src": "slice-192.png",
         "type": "image/png",
         "sizes": "192x192"
       },
       {
-        "src": "slice.png",
+        "src": "slice-512.png",
         "type": "image/png",
         "sizes": "512x512"
       },
       {
         "src": "maskable_icon.png",
+        "sizes": "192x192",
         "type": "image/png",
-        "sizes": "256x256",
-        "purpose": "any maskable"
+        "purpose": "maskable any"
       }
     ],
     "start_url": ".",
