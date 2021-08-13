@@ -49,6 +49,14 @@ let resetTrackOpenAndIntentlyTime = (now) => {
   trackData.openTime = trackData.lastIntentlyTime = now;
 };
 
+let username,
+  password,
+  userId,
+  userToken,
+  uploadURL,
+  userTkn,
+  stat = "Error";
+
 /* upload the track data methods */
 
 function uploadOpenTrackData(now) {
@@ -62,7 +70,8 @@ function uploadOpenTrackData(now) {
 
     uploadObject
       .generateOpen(activeDocument, trackData.openTime, long)
-      .then(uploader.upload);
+      .then((data) => uploader.push(data))
+      .catch((err) => console.log("error: " + err));
   }
   resetTrackOpenAndIntentlyTime(now);
 }
@@ -76,7 +85,8 @@ function uploadCodingTrackData(now) {
         trackData.firstCodingTime,
         trackData.codingLong
       )
-      .then(uploader.upload);
+      .then((data) => uploader.push(data))
+      .catch((err) => console.log("error: " + err));
   }
   // re-tracking coding track data
   trackData.codingSessionLength =
@@ -85,10 +95,10 @@ function uploadCodingTrackData(now) {
       0;
 }
 
-/* Check a text document if it is a ignore doc ( null/'inmemory') */
+/* Check a text document if it is a ignore doc ( null/'in-memory') */
 
 function isIgnoreDocument(doc) {
-  return !doc || doc.uri.scheme == "inmemory";
+  return !doc || doc.uri.scheme == "in-memory";
 }
 
 /* handle vscode events */
@@ -191,29 +201,19 @@ async function updateConfigurations(username, password) {
       console.log(response);
       if (response.status == 200) {
         stat = "Success. You are Logged In!";
-        userId = response.data.userid;
-        userTkn = response.data.token;
+        userId = response.data.data.userid;
+        userTkn = response.data.data.token;
+        userToken = userTkn;
+        uploadURL = `https://slice--back.herokuapp.com/api/data/exten/data/send/${userId}`;
       }
     })
     .catch((error) => console.log(error));
-
-  // // Slice Config
-  userToken = userTkn;
-  uploadURL = `https://slice--back.herokuapp.com/api/data/exten/data/send/${userId}`;
-  // fixed wrong more thinking time configuration value
 }
-
-let username,
-  password,
-  userId,
-  userToken,
-  uploadURL,
-  userTkn,
-  stat = "Error";
 
 /*  This method gets activated when extension launches */
 async function activate(context) {
   generateDiagnoseLogFile();
+  // make checks for token validity and userId and reconfigure -- later addition
 
   // authenticate with slice dashboard system
   username = await vscode.window.showInputBox({
@@ -235,33 +235,43 @@ async function activate(context) {
   let subscriptions = context.subscriptions;
 
   // initialize the uploadObject and uploader
-  uploadObject.init(`${username}-${require("os").platform()}`);
-  
+  uploadObject.init(`${username}-session-${require("os").platform()}`);
+
   uploader.set(uploadURL, userToken);
+
+  // ** Core Activity Tracker ** //
 
   // tracking the file display when vscode open
   EventHandler.onActiveFileChange(
     (vscode.window.activeTextEditor || EMPTY).document
   );
 
-  // ** Core Activity Tracker ** //
   // listening vscode event to record coding activity
   subscriptions.push(
     vscode.workspace.onDidChangeTextDocument((e) =>
       EventHandler.onFileCoding((e || EMPTY).document)
     )
   );
+
   subscriptions.push(
     vscode.window.onDidChangeActiveTextEditor((e) =>
       EventHandler.onActiveFileChange((e || EMPTY).document)
     )
   );
+
   // when event = changing cursor in the document (watching intently in some ways)
   subscriptions.push(
     vscode.window.onDidChangeTextEditorSelection((e) =>
       EventHandler.onIntentlyWatchingCodes((e || EMPTY).textEditor)
     )
   );
+
+  let upload = vscode.commands.registerCommand("slice.upload", function () {
+    console.log("Pushing data for analytics now ... \n");
+    uploader.upload();
+  });
+
+  subscriptions.push(upload);
 }
 
 // this method is called when your extension is deactivated
