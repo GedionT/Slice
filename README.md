@@ -1,7 +1,3 @@
-# Slice
-
-A developer habit tracker VS Code extension.
-
 <h1 align="center">
   <img src="https://i.im.ge/2021/07/27/DBVLX.png" alt="Slice Logo" width="224px"/><br/>
   Slice, Know your habits
@@ -11,8 +7,6 @@ A developer habit tracker VS Code extension.
 
 [![CodeQL](https://github.com/GedionT/Slice/actions/workflows/codeql-analysis.yml/badge.svg?branch=master)](https://github.com/GedionT/Slice/actions/workflows/codeql-analysis.yml) 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/f050968e-d9bd-4f9e-9a15-f7f513129c0a/deploy-status)](https://app.netlify.com/sites/suspicious-shannon-ba26b1/deploys)
-
-
 
 ## Quick start
 
@@ -43,15 +37,15 @@ Together, we can make this project **better** every day!
 - [Lucid Flow: System Design](https://lucid.app/lucidchart/c3d9fee3-0123-42c8-b444-9bda69299d81/edit?viewport_loc=-16%2C-322%2C2413%2C1101%2C0_0&shared=true)
 - [Overall Structure](https://lucid.app/lucidchart/f1801f87-51e6-4ba5-8dd9-16e108216c25/edit?page=0_0#)
 
-## ⚠️ License
+## License
 
-`Slice` is free and open-source software licensed under the [MIT License](https://github.com/GedionT/Slice/blob/master/LICENSE). Official [logo](https://github.com) was created by [Gedion T.](https://github.com/GedionT), [Shivam](https://github.com/shivamsouravjha), and [Hargun](https://github.com/hkaur008.com) distributed under ...
-{"mode":"full","isActive":false}
+`Slice` is free and open-source software licensed under the [MIT License](https://github.com/GedionT/Slice/blob/master/LICENSE). Official [logo](https://github.com) was created by [Gedion T.](https://github.com/GedionT), [Shivam](https://github.com/shivamsouravjha), and [Hargun](https://github.com/hkaur008.com) distributed under ... 
+
+## Deployment Links
+ [Frontend](https://microteams.tech/) 🔹 [Backend](https://slice--back.herokuapp.com/) 🔹 [Extension](https://github.com/GedionT/Slice/tree/master/Extension)
 
 
-## Deployed Links
-- [Frontend](https://microteams.tech/)
-- [Backend](https://slice--back.herokuapp.com/)
+## Feature List
 
 | Features      |            Purpose        | 
 | ------------- |:-------------------------:| 
@@ -66,26 +60,29 @@ Together, we can make this project **better** every day!
 | Efficiency report |A comparison of code written with the duration of coding session     |   
 | Language used |A summary of coding language used.    |   
 
-## Few Images of Frontend
+## System Flow
 
-![image](https://user-images.githubusercontent.com/60891544/128580430-f7046355-9e61-401e-9f25-749f266a3957.png)
+![flow](https://user-images.githubusercontent.com/26666155/129299739-e3f7ea08-58e7-43a7-8b08-fa9f59142542.png)
 
-![image](https://user-images.githubusercontent.com/60891544/128579930-6742252e-3335-4d88-8472-16d04699d3a4.png)
+## Screenshots of WebApp
 
-![image](https://user-images.githubusercontent.com/60891544/128580364-f9bcaf83-52d6-436e-94e0-eba1ce43ef4c.png)
+![Login Page](https://user-images.githubusercontent.com/60891544/128580469-8ded6466-d82a-4e5a-aefc-d7e254f7eab5.png)
 
-![image](https://user-images.githubusercontent.com/60891544/128580396-5f63330f-cabb-4b0a-b2f5-13e0cba9c86f.png)
+![Signup Page](https://user-images.githubusercontent.com/60891544/128580487-2c97bc91-daa2-4b85-b14c-a03d8d4d73bd.png)
 
-![image](https://user-images.githubusercontent.com/60891544/128580405-c50f566f-88b9-40a8-b4c2-b5a7971ab5f4.png)
+![Profile Page](https://user-images.githubusercontent.com/60891544/128580430-f7046355-9e61-401e-9f25-749f266a3957.png)
 
-![image](https://user-images.githubusercontent.com/60891544/128580419-fcbb35c8-c776-45cc-823f-8ba8e9c08eb5.png)
+![GitHub Stat Page](https://user-images.githubusercontent.com/60891544/128579930-6742252e-3335-4d88-8472-16d04699d3a4.png)
 
-![image](https://user-images.githubusercontent.com/60891544/128580449-cec3b8a9-e143-468d-ac18-0297976d28a9.png)
+![Stats](https://user-images.githubusercontent.com/60891544/128580364-f9bcaf83-52d6-436e-94e0-eba1ce43ef4c.png)
 
-![image](https://user-images.githubusercontent.com/60891544/128580469-8ded6466-d82a-4e5a-aefc-d7e254f7eab5.png)
+![Stats](https://user-images.githubusercontent.com/60891544/128580396-5f63330f-cabb-4b0a-b2f5-13e0cba9c86f.png)
 
-![image](https://user-images.githubusercontent.com/60891544/128580487-2c97bc91-daa2-4b85-b14c-a03d8d4d73bd.png)
+![Stats](https://user-images.githubusercontent.com/60891544/128580405-c50f566f-88b9-40a8-b4c2-b5a7971ab5f4.png)
 
+![Stats](https://user-images.githubusercontent.com/60891544/128580419-fcbb35c8-c776-45cc-823f-8ba8e9c08eb5.png)
+
+![ChatBot](https://user-images.githubusercontent.com/60891544/128580449-cec3b8a9-e143-468d-ac18-0297976d28a9.png)
 
 
 Upon signing in the user gets a message like this(give the user had signed up with phone number(including the country code, for ex +91......(code for **India**)):-
