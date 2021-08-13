@@ -6,7 +6,7 @@
 
 
 [![CodeQL](https://github.com/GedionT/Slice/actions/workflows/codeql-analysis.yml/badge.svg?branch=master)](https://github.com/GedionT/Slice/actions/workflows/codeql-analysis.yml) 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/f050968e-d9bd-4f9e-9a15-f7f513129c0a/deploy-status)](https://app.netlify.com/sites/suspicious-shannon-ba26b1/deploys) ![GitHub all releases](https://img.shields.io/github/downloads/gediont/slice/total) ![GitHub issues](https://img.shields.io/github/issues-raw/gediont/slice) ![GitHub language count](https://img.shields.io/github/languages/count/gediont/slice)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/f050968e-d9bd-4f9e-9a15-f7f513129c0a/deploy-status)](https://app.netlify.com/sites/suspicious-shannon-ba26b1/deploys) [![frontend_build_test](https://github.com/GedionT/Slice/actions/workflows/frontend_build_test.yml/badge.svg)](https://github.com/GedionT/Slice/actions/workflows/frontend_build_test.yml) ![GitHub all releases](https://img.shields.io/github/downloads/gediont/slice/total) ![GitHub issues](https://img.shields.io/github/issues-raw/gediont/slice) ![GitHub language count](https://img.shields.io/github/languages/count/gediont/slice)
 ![GitHub](https://img.shields.io/github/license/gediont/slice)
 ## Quick start
 
