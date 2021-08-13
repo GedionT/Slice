@@ -4,15 +4,18 @@ This is the README for your extension "slice". After writing up a brief descript
 
 ## Features
 
-
-
-
 ## Requirements
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+Dependencies:
+
+-      "name": "axios"
+-      "name": "objects-to-csv"
+-      "name": "node-fetch"
+-      "name": "request",
 
 ## Extension Settings
 
+- Slice.upload - uploads daily data to analytics through the backend
 
 ## Known Issues
 
@@ -20,13 +23,9 @@ Calling out known issues can help limit users opening duplicate issues against y
 
 ## Release Notes
 
-Users appreciate release notes as you update your extension.
-
 ### 1.0.0
 
-Initial release of Splice
-
-## Working with Markdown
+Initial release of Splice in Beta
 
 ### Documentation
 
