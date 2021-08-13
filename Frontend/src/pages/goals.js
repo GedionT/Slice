@@ -19,6 +19,8 @@ import TrackChangesIcon from "@material-ui/icons/TrackChanges";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+    padding: theme.spacing(2),
+    backgroundColor: theme.palette.text.primary
   },
   title: {
     flexGrow: 1,
@@ -221,8 +223,6 @@ const Goals = () => {
           </Button>
         </Toolbar>
       </AppBar>
-
-      <br />
       <div className={classes.root}>
         <Container>
           <Grid container spacing={3}>

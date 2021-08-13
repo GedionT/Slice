@@ -61,7 +61,6 @@ const Main = () => {
           </Toolbar>
         </AppBar>
 
-        <br />
         <Graph />
 
         <Chatbot />
