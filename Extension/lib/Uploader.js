@@ -2,14 +2,19 @@
 
 // const vscode = require("vscode");
 const ext = require("./VSCodeHelpers");
-const { Parser } = require("json2csv");
+const ObjectsToCsv = require("objects-to-csv");
+const fs = require("fs");
+const path = require("path");
 const Request = require("request");
+
+const rootDir = path.resolve(__dirname, "..");
 
 let Q = [],
   uploadURL,
   uploadToken,
   uploadHeader = {
-    "Content-Type": "application/x-www-form-urlencoded; charset=utf-8",
+    // "Content-Type": "application/x-www-form-urlencoded; charset=utf-8",
+    "Content-Type": "null",
   },
   uploading = 0,
   //Avoid Show error information too many times
@@ -21,8 +26,16 @@ let uploader = {
     uploadURL = url;
     uploadToken = token;
   },
-  upload: function (data) {
-    Q.push(data);
+  push: function (data) {
+    // Q.push(data);
+    (async () => {
+      const csv = new ObjectsToCsv(data);
+      await csv.toDisk("./datums.csv", { append: true });
+      console.log(await csv.toString()); //delete later
+    })();
+  },
+  upload: function () {
+    console.log("In Uploader.upload");
     process.nextTick(_upload);
   },
 };
@@ -36,11 +49,25 @@ function _upload() {
 
   var data = Q[0];
   //Set up upload token
-  data.token = uploadToken;
+  // data.token = uploadToken;
 
-  const uploadOptions = { method: "POST", form: data, headers: uploadHeader };
+  const uploadOptions = {
+    method: "POST",
+    url: uploadURL,
+    form: data,
+    headers: uploadHeader,
+    formData: {
+      "data-patch": {
+        value: fs.createReadStream(path.resolve(rootDir, "datums.csv")),
+        options: {
+          filename: `userId/${Date.now}/datum.csv`,
+          contentType: null,
+        },
+      },
+    },
+  };
 
-  Request(uploadURL, uploadOptions, function (err, res, bd) {
+  Request(uploadOptions, function (err, res, bd) {
     uploading = 0;
 
     let success = true;
@@ -104,18 +131,6 @@ function toJSON(bd) {
     return JSON.parse(bd);
   } catch (err) {
     return { JSONError: true, error: "Unrecognized response" };
-  }
-}
-
-function toCSV(json) {
-  // convert object to csv
-  try {
-    let parser = new Parser();
-    let csv = parser.parse(json);
-    console.log(csv);
-    return csv;
-  } catch (err) {
-    console.log(err);
   }
 }
 
