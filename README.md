@@ -53,6 +53,18 @@ Together, we can make this project **better** every day!
 - [Frontend](https://microteams.tech/)
 - [Backend](https://slice--back.herokuapp.com/)
 
+| Features      |            Purpose        | 
+| ------------- |:-------------------------:| 
+| Chatbot       | To answer small questions |
+| Notification  | A SMS update of work summary|  
+| Chatroom | to communicate with friends and share progress.      |   
+| Github Report | An analysis of github profile and activity |   
+| Reading Progress Report | A comparion between Code reading progress of current and last week      |   
+| Coding Progress Report | A comparion between Coding Progress of current and last week      |   
+| Coding Goals Achieved Report | A comparion between Coding Progress of current week and the aim    |   
+| Edit Goals |To edit the coding goals      |   
+| Efficiency report |A comparison of code written with the duration of coding session     |   
+| Language used |A summary of coding language used.    |   
 
 ## Few Images of Frontend
 
