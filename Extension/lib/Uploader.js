@@ -26,13 +26,13 @@ let uploader = {
     uploadURL = url;
     uploadToken = token;
   },
-  push: function (data) {
+  push: async function (data) {
     // Q.push(data);
-    (async () => {
-      const csv = new ObjectsToCsv(data);
-      await csv.toDisk("./datums.csv", { append: true });
-      console.log(await csv.toString()); //delete later
-    })();
+    // (async () => {
+    const csv = new ObjectsToCsv(data);
+    await csv.toDisk(path.resolve(rootDir, "datums.csv"), { append: true });
+    console.log(await csv.toString()); //delete later
+    // })();
   },
   upload: function () {
     console.log("In Uploader.upload");
