@@ -106,24 +106,22 @@ const Login = () => {
   }
   
   const signupSubmit = ()=> {
-    var success ;
     if(document.getElementById("github") && document.getElementById("password"))
     {
       const signupdata = {
-        "name":document.getElementById("firstName").value+" "+document.getElementById("lastName"),
+        "name":document.getElementById("firstName").value,
         "email":document.getElementById("email").value,
         "githubUsername": document.getElementById("github").value ,
         "password": document.getElementById("password").value,
         "number":document.getElementById("number").value
   };
   axios.post('https://slice--back.herokuapp.com/api/users/account/signup', signupdata)
-    .then(response => {setSuccess(response.data.data.success )});
+    .then(response => { console.log(response.data.data.success);
+      if(response.data.data.success){
+      setShowing(!showing);
+    }});
 }
-    if(success)
-    {
-    history.push("/");
-
-    }
+  
   }
         
 
@@ -224,7 +222,7 @@ const Login = () => {
               </Typography>
               <form className={classes.form} noValidate>
                 <Grid container spacing={2}>
-                  <Grid item xs={12} sm={6}>
+                  <Grid item xs={12} sm={12}>
                     <TextField
                       autoComplete="fname"
                       name="firstName"
@@ -232,19 +230,8 @@ const Login = () => {
                       required
                       fullWidth
                       id="firstName"
-                      label="First Name"
+                      label="Full Name"
                       autoFocus
-                    />
-                  </Grid>
-                  <Grid item xs={12} sm={6}>
-                    <TextField
-                      variant="outlined"
-                      required
-                      fullWidth
-                      id="lastName"
-                      label="Last Name"
-                      name="lastName"
-                      autoComplete="lname"
                     />
                   </Grid>
                   <Grid item xs={12}>
@@ -258,7 +245,7 @@ const Login = () => {
                       autoComplete="email"
                     />
                   </Grid>
-                  <Grid item xs={7}>
+                  <Grid item xs={12}>
                     <TextField
                       variant="outlined"
                       required
@@ -269,13 +256,13 @@ const Login = () => {
                       autoComplete="github"
                     />
                   </Grid>
-                  <Grid item xs={5}>
+                  <Grid item xs={12}>
                     <TextField
                       variant="outlined"
                       required
                       fullWidth
                       id="number"
-                      label="Mobile"
+                      label="Mobile (with country code)"
                       name="number"
                       autoComplete="number"
                     />
