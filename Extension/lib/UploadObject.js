@@ -10,7 +10,7 @@ let lastActiveProject = UNKNOWN;
 
 let baseUploadObject = {
   version: "1.0",
-  token: "This value will be set up in Uploader module",
+  // token: "This value will be set up in Uploader module", // not needed yet. Using userId now
   type: "",
   time: "",
   long: 0,
@@ -21,8 +21,6 @@ let baseUploadObject = {
 
   line: 0,
   char: 0,
-  // r1: "1",
-  // r2: "",
 };
 
 module.exports = { init, generateOpen, generateCode };
@@ -32,7 +30,7 @@ module.exports = { init, generateOpen, generateCode };
  * @param {string} [computerId]
  */
 function init(computerId) {
-  // workspaceFolder[0] alternative
+  // workspaceFolder[0] alternative or root
   lastActiveProject =
     vscode.workspace.workspaceFolders[0].toString() || UNKNOWN;
   baseUploadObject.pcid = computerId;
@@ -81,7 +79,7 @@ function generate(type, activeDocument, time, long) {
   obj.time = time;
   obj.long = long;
   obj.line = activeDocument.lineCount;
-  obj.char = activeDocument.getText().length; // it affect extension efficiency
+  obj.char = activeDocument.getText().length; // it affects extension efficiency
 
   console.log(obj);
   return obj;

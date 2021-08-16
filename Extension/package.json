@@ -14,7 +14,12 @@
 	],
 	"main": "./extension.js",
 	"contributes": {
-		"commands": []
+		"commands": [
+			{
+				"command": "slice.upload",
+				"title": "Upload"
+			}
+		]
 	},
 	"scripts": {
 		"lint": "eslint .",
@@ -34,8 +39,8 @@
 	},
 	"dependencies": {
 		"axios": "^0.21.1",
-		"json2csv": "^5.0.6",
 		"node-fetch": "^2.6.1",
+		"objects-to-csv": "^1.3.6",
 		"request": "^2.88.2"
 	}
 }
